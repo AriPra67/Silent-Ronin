@@ -1,0 +1,57 @@
+############################
+# Unity generated folders #
+############################
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+
+############################
+# Visual Studio / IDE #
+############################
+
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+
+############################
+# OS generated #
+############################
+
+.DS_Store
+Thumbs.db
+
+############################
+# Unity crash / cache files #
+############################
+
+sysinfo.txt
+*.stackdump
+
+############################
+# Build outputs #
+############################
+
+*.apk
+*.aab
+*.exe
+*.app
+*.dll
+
+############################
+# Large / unwanted assets #
+############################
+
+*.psd
+*.psb
+*.tga
+*.fbx~
