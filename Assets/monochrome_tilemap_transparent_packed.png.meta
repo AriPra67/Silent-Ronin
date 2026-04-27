@@ -593,8 +593,8 @@ TextureImporter:
       name: monochrome_tilemap_transparent_packed_6
       rect:
         serializedVersion: 2
-        x: 112
-        y: 272
+        x: 0
+        y: 221
         width: 80
         height: 48
       alignment: 0
