@@ -29839,6 +29839,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 3
   healthUI: {fileID: 710299673}
+  animator: {fileID: 0}
+  movement: {fileID: 0}
 --- !u!114 &2031428248 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3592394228873683443, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
