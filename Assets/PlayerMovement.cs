@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     private float horizontalMovement;
 
-    private bool facingRight = true; // 👈 ADDED
+    private bool facingRight = true;
+    private bool isAttacking;
 
     [Header("Jumping")]
     public float jumpPower = 10f;
@@ -38,20 +39,34 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Movement
+        HandleMovement();
+        HandleFlip();
+        HandleGravity();
+        HandleAnimations();
+    }
+
+    // ---------------- MOVEMENT ----------------
+    void HandleMovement()
+    {
+        if (isAttacking)
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            return;
+        }
+
         rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+    }
 
-        // Flip character 👇
+    void HandleFlip()
+    {
         if (horizontalMovement > 0 && !facingRight)
-        {
             Flip();
-        }
         else if (horizontalMovement < 0 && facingRight)
-        {
             Flip();
-        }
+    }
 
-        // Gravity
+    void HandleGravity()
+    {
         if (rb.linearVelocity.y < 0)
         {
             rb.gravityScale = baseGravity * fallGravityMult;
@@ -61,15 +76,21 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.gravityScale = baseGravity;
         }
+    }
 
-        // Animation
+    void HandleAnimations()
+    {
         animator.SetFloat("yVelocity", rb.linearVelocity.y);
         animator.SetFloat("magnitude", Mathf.Abs(horizontalMovement));
     }
 
+    // ---------------- INPUT ----------------
     public void Move(InputAction.CallbackContext context)
     {
         horizontalMovement = context.ReadValue<Vector2>().x;
+
+        if (context.canceled)
+            horizontalMovement = 0f;
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -84,6 +105,44 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // ---------------- ATTACKS (MATCHING YOUR INPUT NAMES) ----------------
+    public void Attack(InputAction.CallbackContext context)
+    {
+        if (context.performed && !isAttacking)
+        {
+            animator.SetTrigger("Attack");
+            isAttacking = true;
+        }
+    }
+
+    public void Attack2(InputAction.CallbackContext context)
+    {
+        if (context.performed && !isAttacking)
+        {
+            animator.SetTrigger("Attack 2");
+            isAttacking = true;
+        }
+    }
+
+    public void Attack3(InputAction.CallbackContext context)
+    {
+        if (context.performed && !isAttacking)
+        {
+            animator.SetTrigger("Attack 3");
+            isAttacking = true;
+        }
+    }
+
+    // ---------------- RESET ATTACK ----------------
+    public void EndAttack()
+    {
+        isAttacking = false;
+
+        // stop leftover sliding
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+    }
+
+    // ---------------- FLIP ----------------
     private void Flip()
     {
         facingRight = !facingRight;
@@ -93,6 +152,7 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = scale;
     }
 
+    // ---------------- GROUND CHECK ----------------
     private bool isGrounded()
     {
         return Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0f, groundLayer);
