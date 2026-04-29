@@ -23,7 +23,6 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isDead) return;
 
-        // TEST DAMAGE
         if (Input.GetKeyDown(KeyCode.H))
         {
             TakeDamage(1);
@@ -45,22 +44,22 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-   void Die()
-{
-    isDead = true;
-
-    Debug.Log("Player Dead");
-
-    if (movement != null)
-        movement.enabled = false;
-
-    Rigidbody2D rb = GetComponent<Rigidbody2D>();
-    if (rb != null)
-        rb.velocity = Vector2.zero;
-
-    if (animator != null)
+    void Die()
     {
-        animator.Play("Samurai die", 0, 0f);
-    }
+        isDead = true;
 
+        Debug.Log("Player Dead");
+
+        if (movement != null)
+            movement.enabled = false;
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+            rb.linearVelocity = Vector2.zero;
+
+        if (animator != null)
+        {
+            animator.Play("Samurai die", 0, 0f);
+        }
+    }
 }
