@@ -29839,7 +29839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 3
   healthUI: {fileID: 710299673}
-  animator: {fileID: 0}
+  animator: {fileID: 2031428249}
   movement: {fileID: 0}
 --- !u!114 &2031428248 stripped
 MonoBehaviour:
@@ -29852,6 +29852,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b383929cac34f45ba07378eb8aa8e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+--- !u!95 &2031428249 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6478720950531300001, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
+  m_PrefabInstance: {fileID: 1658544737}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
