@@ -1553,11 +1553,10 @@ Transform:
   m_GameObject: {fileID: 1405343340}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -0.38, y: -0.53, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1742929608}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1405343344
@@ -1632,46 +1631,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   target: {fileID: 623294607}
   offset: {x: 0, y: 0, z: -10}
---- !u!1 &1406697358
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1406697359}
-  m_Layer: 0
-  m_Name: GameOverScreen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1406697359
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1406697358}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 578984509}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!4 &1482589915 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8860395998736574298, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-  m_PrefabInstance: {fileID: 1658544737}
-  m_PrefabAsset: {fileID: 0}
+  minX: -5
+  maxX: 18
+  minY: -0.5
+  maxY: 39
 --- !u!1 &1484761265
 GameObject:
   m_ObjectHideFlags: 0
@@ -29506,65 +29469,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1219739291377844544, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: m_Size.x
-      value: 0.31640977
-      objectReference: {fileID: 0}
-    - target: {fileID: 1219739291377844544, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: m_Size.y
-      value: 0.7030587
-      objectReference: {fileID: 0}
-    - target: {fileID: 1219739291377844544, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 9ef6e9355a03b3041a1840c7fe53ec48, type: 2}
-    - target: {fileID: 1219739291377844544, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.03695084
-      objectReference: {fileID: 0}
-    - target: {fileID: 1219739291377844544, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.0115163475
-      objectReference: {fileID: 0}
-    - target: {fileID: 1219739291377844544, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 1219739291377844544, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2669280641206261571, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 4723107735738678597, guid: c8c1ae78c93e6e54a9942e9cf6ed76d7, type: 3}
-    - target: {fileID: 3592394228873683443, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: jumpPower
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3592394228873683443, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: groundCheckPos
-      value: 
-      objectReference: {fileID: 1482589915}
-    - target: {fileID: 3592394228873683443, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: groundCheckSize.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3592394228873683443, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: groundCheckSize.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3592394228873683443, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4394533049985495049, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3.2190356
-      objectReference: {fileID: 0}
-    - target: {fileID: 4394533049985495049, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.8503714
+    - target: {fileID: 957670534480793189, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4394533049985495049, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -29801,6 +29708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1742929608}
   - component: {fileID: 1742929607}
+  - component: {fileID: 1742929609}
   m_Layer: 0
   m_Name: lvl1background_0
   m_TagString: Untagged
@@ -29876,11 +29784,11 @@ Transform:
   m_GameObject: {fileID: 1742929606}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.21, y: -0.71, z: 20}
-  m_LocalScale: {x: 0.7316, y: 0.7316, z: 0.7316}
+  m_LocalPosition: {x: 0.7, y: 0.17, z: 10}
+  m_LocalScale: {x: 0.8263788, y: 0.8263788, z: 0.8263788}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1405343343}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1824287973
 GameObject:
@@ -30404,6 +30312,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1405343343}
+  - {fileID: 1742929608}
   - {fileID: 1973603688}
   - {fileID: 1658544737}
   - {fileID: 578984509}
