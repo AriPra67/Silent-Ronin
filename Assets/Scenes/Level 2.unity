@@ -12688,12 +12688,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8dfe131afe8d644864c66e078a1ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  target: {fileID: 0}
-  offset: {x: 0, y: 0, z: -10}
-  minX: -9999
-  maxX: 9999
-  minY: -9999
-  maxY: 9999
 --- !u!1 &1484761265
 GameObject:
   m_ObjectHideFlags: 0
