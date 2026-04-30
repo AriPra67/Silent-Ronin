@@ -32,14 +32,26 @@ public class EnemyAI : MonoBehaviour
     private bool isGrounded;
     private bool isAttacking;
 
+    void Awake()
+    {
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
+
+        if (animator == null)
+            animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         if (player == null || rb == null) return;
 
-        // ground check
-        isGrounded = Physics2D.OverlapBox(groundCheck.position, groundSize, 0f, groundLayer);
+        isGrounded = Physics2D.OverlapBox(
+            groundCheck.position,
+            groundSize,
+            0f,
+            groundLayer
+        );
 
-        // handle attack timer first
         if (isAttacking)
         {
             attackTimer -= Time.deltaTime;
@@ -47,42 +59,39 @@ public class EnemyAI : MonoBehaviour
             if (attackTimer <= 0f)
                 ResetAttack();
 
+            UpdateAnimation();
             return;
         }
 
         float dist = Vector2.Distance(transform.position, player.position);
         float heightDiff = player.position.y - transform.position.y;
 
-        // attack priority
         if (dist <= attackDistance)
         {
             Attack();
-            return;
         }
-
-        // chase + jump logic
-        if (dist <= chaseDistance)
+        else if (dist <= chaseDistance)
         {
             Chase(heightDiff);
-            return;
+        }
+        else
+        {
+            Idle();
         }
 
-        Idle();
+        UpdateAnimation();
     }
 
     void Chase(float heightDiff)
     {
         float dir = Mathf.Sign(player.position.x - transform.position.x);
 
-        // move
         rb.linearVelocity = new Vector2(dir * speed, rb.linearVelocity.y);
 
-        // flip
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * dir;
         transform.localScale = scale;
 
-        // 🔥 PLATFORM / WALL DETECTION
         RaycastHit2D wallInfo = Physics2D.Raycast(
             wallCheck.position,
             Vector2.right * dir,
@@ -90,16 +99,10 @@ public class EnemyAI : MonoBehaviour
             groundLayer
         );
 
-        // jump if:
-        // - player is above OR
-        // - wall / platform edge in front
         if (isGrounded && (heightDiff > 1f || wallInfo.collider != null))
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
-
-        if (animator != null)
-            animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
     }
 
     void Attack()
@@ -127,9 +130,15 @@ public class EnemyAI : MonoBehaviour
     void Idle()
     {
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+    }
 
+    void UpdateAnimation()
+    {
         if (animator != null)
-            animator.SetFloat("Speed", 0);
+        {
+            animator.SetFloat("magnitude", isGrounded ? Mathf.Abs(rb.linearVelocity.x) : 0f);
+            animator.SetBool("isGrounded", isGrounded);
+        }
     }
 
     private void OnDrawGizmosSelected()

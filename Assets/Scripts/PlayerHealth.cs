@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -11,14 +12,43 @@ public class PlayerHealth : MonoBehaviour
 
     private bool isDead;
     private bool isInvincible;
-    public float invincibleTime = 1f;
+
+    public float invincibleTime = 0.2f;
+
+    void Awake()
+    {
+        if (animator == null)
+            animator = GetComponent<Animator>();
+
+        if (movement == null)
+            movement = GetComponent<PlayerMovement>();
+
+        if (healthUI == null)
+            healthUI = FindObjectOfType<HealthUI>();
+    }
 
     void Start()
     {
         currentHealth = maxHealth;
 
         if (healthUI != null)
+        {
             healthUI.SetMaxHearts(maxHealth);
+            healthUI.UpdateHearts(currentHealth);
+        }
+        else
+        {
+            Debug.LogWarning("HealthUI NOT FOUND");
+        }
+    }
+
+    void Update()
+    {
+        // 🔥 PRESS H TO TAKE DAMAGE
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            TakeDamage(1);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -26,23 +56,23 @@ public class PlayerHealth : MonoBehaviour
         if (isDead || isInvincible) return;
 
         currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         Debug.Log("Player HP: " + currentHealth);
 
         if (healthUI != null)
             healthUI.UpdateHearts(currentHealth);
 
-        if (animator != null)
-            animator.SetTrigger("Hurt");
-
         if (currentHealth <= 0)
         {
             Die();
+            return;
         }
-        else
-        {
-            StartCoroutine(Invincibility());
-        }
+
+        if (animator != null)
+            animator.SetTrigger("Hurt");
+
+        StartCoroutine(Invincibility());
     }
 
     void Die()
@@ -50,8 +80,7 @@ public class PlayerHealth : MonoBehaviour
         if (isDead) return;
 
         isDead = true;
-
-        Debug.Log("Player Dead");
+        Debug.Log("PLAYER DEAD");
 
         if (movement != null)
             movement.enabled = false;
@@ -60,14 +89,17 @@ public class PlayerHealth : MonoBehaviour
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
-            rb.bodyType = RigidbodyType2D.Static;
+            rb.gravityScale = 0f;
         }
 
         if (animator != null)
-            animator.SetTrigger("Die");
+        {
+            animator.ResetTrigger("Hurt");
+            animator.Play("Samurai die");
+        }
     }
 
-    System.Collections.IEnumerator Invincibility()
+    IEnumerator Invincibility()
     {
         isInvincible = true;
         yield return new WaitForSeconds(invincibleTime);
