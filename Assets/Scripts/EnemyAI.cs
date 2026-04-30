@@ -5,7 +5,6 @@ public class EnemyAI : MonoBehaviour
     public Transform player;
     public Rigidbody2D rb;
     public Animator animator;
-
     public GameObject hitbox;
 
     [Header("Movement")]
@@ -39,18 +38,30 @@ public class EnemyAI : MonoBehaviour
 
         if (animator == null)
             animator = GetComponent<Animator>();
+
+        if (player == null)
+        {
+            GameObject foundPlayer = GameObject.FindGameObjectWithTag("Player");
+            if (foundPlayer != null)
+                player = foundPlayer.transform;
+        }
+
+        if (hitbox != null)
+            hitbox.SetActive(false);
     }
 
     void Update()
     {
-        if (player == null || rb == null) return;
+        if (rb == null) return;
 
-        isGrounded = Physics2D.OverlapBox(
-            groundCheck.position,
-            groundSize,
-            0f,
-            groundLayer
-        );
+        CheckGround();
+
+        if (player == null)
+        {
+            Idle();
+            UpdateAnimation();
+            return;
+        }
 
         if (isAttacking)
         {
@@ -82,27 +93,57 @@ public class EnemyAI : MonoBehaviour
         UpdateAnimation();
     }
 
+    void CheckGround()
+    {
+        if (groundCheck == null)
+        {
+            isGrounded = false;
+            return;
+        }
+
+        isGrounded = Physics2D.OverlapBox(
+            groundCheck.position,
+            groundSize,
+            0f,
+            groundLayer
+        );
+    }
+
     void Chase(float heightDiff)
     {
         float dir = Mathf.Sign(player.position.x - transform.position.x);
 
         rb.linearVelocity = new Vector2(dir * speed, rb.linearVelocity.y);
 
-        Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * dir;
-        transform.localScale = scale;
+        Flip(dir);
 
-        RaycastHit2D wallInfo = Physics2D.Raycast(
-            wallCheck.position,
-            Vector2.right * dir,
-            wallCheckDistance,
-            groundLayer
-        );
+        bool touchingWall = false;
 
-        if (isGrounded && (heightDiff > 1f || wallInfo.collider != null))
+        if (wallCheck != null)
+        {
+            RaycastHit2D wallInfo = Physics2D.Raycast(
+                wallCheck.position,
+                Vector2.right * dir,
+                wallCheckDistance,
+                groundLayer
+            );
+
+            touchingWall = wallInfo.collider != null;
+        }
+
+        if (isGrounded && (heightDiff > 1f || touchingWall))
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
+    }
+
+    void Flip(float dir)
+    {
+        if (dir == 0) return;
+
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * dir;
+        transform.localScale = scale;
     }
 
     void Attack()
@@ -134,27 +175,29 @@ public class EnemyAI : MonoBehaviour
 
     void UpdateAnimation()
     {
-        if (animator != null)
-        {
-            animator.SetFloat("magnitude", isGrounded ? Mathf.Abs(rb.linearVelocity.x) : 0f);
-            animator.SetBool("isGrounded", isGrounded);
-        }
+        if (animator == null || rb == null) return;
+
+        animator.SetFloat("magnitude", Mathf.Abs(rb.linearVelocity.x));
+        animator.SetBool("isGrounded", isGrounded);
     }
 
-    private void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         if (groundCheck != null)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawCube(groundCheck.position, groundSize);
+            Gizmos.DrawWireCube(groundCheck.position, groundSize);
         }
 
         if (wallCheck != null)
         {
             Gizmos.color = Color.red;
+
+            Vector3 dir = transform.localScale.x >= 0 ? Vector3.right : Vector3.left;
+
             Gizmos.DrawLine(
                 wallCheck.position,
-                wallCheck.position + Vector3.right * wallCheckDistance
+                wallCheck.position + dir * wallCheckDistance
             );
         }
     }

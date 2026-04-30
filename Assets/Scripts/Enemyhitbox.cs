@@ -6,14 +6,18 @@ public class EnemyHitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // safer check (doesn't rely only on tag order)
-        PlayerHealth player = other.GetComponent<PlayerHealth>();
+        Debug.Log("ENEMY HITBOX TOUCHED: " + other.name);
+
+        PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
 
         if (player != null)
         {
-            Debug.Log("Player hit for " + damage);
-
+            Debug.Log("PLAYER FOUND - DAMAGE");
             player.TakeDamage(damage);
+        }
+        else
+        {
+            Debug.Log("NO PlayerHealth found on " + other.name);
         }
     }
 }
