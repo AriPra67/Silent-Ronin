@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem; 
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -7,15 +8,21 @@ public class PlayerHealth : MonoBehaviour
 
     public HealthUI healthUI;
 
+    public GameOverManager gameOverManager; 
+
     void Start()
     {
         currentHealth = maxHealth;
-        healthUI.SetMaxHearts(maxHealth);
+        
+        if (healthUI != null)
+        {
+            healthUI.SetMaxHearts(maxHealth);
+        }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Keyboard.current != null && Keyboard.current.hKey.wasPressedThisFrame)
         {
             TakeDamage(1);
         }
@@ -24,11 +31,24 @@ public class PlayerHealth : MonoBehaviour
     private void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        healthUI.UpdateHearts(currentHealth);
+
+        if (healthUI != null)
+        {
+            healthUI.UpdateHearts(currentHealth);
+        }
 
         if (currentHealth <= 0)
         {
             Debug.Log("Player Dead");
+            
+            if (gameOverManager != null)
+            {
+                gameOverManager.ShowGameOver();
+            }
+            else
+            {
+                Debug.LogWarning("GameOverManager is missing! Check the slot on the Player object.");
+            }
         }
     }
 }
