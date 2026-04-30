@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
     public PlayerMovement movement;
 
     private bool isDead;
+    private bool isInvincible;
+    public float invincibleTime = 1f;
 
     void Start()
     {
@@ -19,28 +21,27 @@ public class PlayerHealth : MonoBehaviour
             healthUI.SetMaxHearts(maxHealth);
     }
 
-    void Update()
-    {
-        if (isDead) return;
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            TakeDamage(1);
-        }
-    }
-
     public void TakeDamage(int damage)
     {
-        if (isDead) return;
+        if (isDead || isInvincible) return;
 
         currentHealth -= damage;
+
+        Debug.Log("Player HP: " + currentHealth);
 
         if (healthUI != null)
             healthUI.UpdateHearts(currentHealth);
 
+        if (animator != null)
+            animator.SetTrigger("Hurt");
+
         if (currentHealth <= 0)
         {
             Die();
+        }
+        else
+        {
+            StartCoroutine(Invincibility());
         }
     }
 
@@ -64,5 +65,12 @@ public class PlayerHealth : MonoBehaviour
 
         if (animator != null)
             animator.SetTrigger("Die");
+    }
+
+    System.Collections.IEnumerator Invincibility()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(invincibleTime);
+        isInvincible = false;
     }
 }
