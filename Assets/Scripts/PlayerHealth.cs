@@ -5,15 +5,18 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 3;
     private int currentHealth;
-
     public HealthUI healthUI;
-
     public GameOverManager gameOverManager; 
+
+    private Vector2 spawnPoint;
 
     void Start()
     {
         currentHealth = maxHealth;
         
+        // Record the starting position at the very beginning
+        spawnPoint = transform.position;
+
         if (healthUI != null)
         {
             healthUI.SetMaxHearts(maxHealth);
@@ -28,6 +31,21 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Respawn()
+    {
+        // Move player back to start
+        transform.position = spawnPoint;
+        
+        // Reset health logic
+        currentHealth = maxHealth;
+        
+        // Update the UI hearts
+        if (healthUI != null)
+        {
+            healthUI.UpdateHearts(currentHealth);
+        }
+    }
+
     private void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -39,15 +57,9 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Debug.Log("Player Dead");
-            
             if (gameOverManager != null)
             {
                 gameOverManager.ShowGameOver();
-            }
-            else
-            {
-                Debug.LogWarning("GameOverManager is missing! Check the slot on the Player object.");
             }
         }
     }
