@@ -63,7 +63,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.9205487, y: 2.1049, z: 2.1049}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8860395998736574298}
@@ -118,7 +118,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4723107735738678597, guid: c68d6b85eef1dfc41a0aab872d4290ce, type: 3}
+  m_Sprite: {fileID: 4723107735738678597, guid: c8c1ae78c93e6e54a9942e9cf6ed76d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -166,7 +166,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.57, y: 0.7}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -187,11 +187,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   rb: {fileID: 0}
+  animator: {fileID: 0}
   moveSpeed: 5
   jumpPower: 10
   baseGravity: 2
   maxFallSpeed: 18
   fallGravityMult: 2
+  groundCheckPos: {fileID: 0}
+  groundCheckSize: {x: 0.7, y: 0.2}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &7685410050974216300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,6 +323,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8eea445c-48eb-49af-bc52-db6deb6451ea
+    m_ActionName: 'Player/Attack 2[/Keyboard/k]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7f574118-0130-4a0e-a8a1-9ed1bd40e1ad
+    m_ActionName: 'Player/Attack 3[/Keyboard/l]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

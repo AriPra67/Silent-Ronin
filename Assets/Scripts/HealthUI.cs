@@ -1,6 +1,6 @@
-using System.Collections.Generic;   // 👈 for List<>
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;              // 👈 for Image
+using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
@@ -14,7 +14,7 @@ public class HealthUI : MonoBehaviour
     {
         foreach (Image heart in hearts)
         {
-            Destroy(heart.gameObject); // ✅ fixed
+            Destroy(heart.gameObject);
         }
 
         hearts.Clear();
@@ -26,10 +26,14 @@ public class HealthUI : MonoBehaviour
             newHeart.color = Color.red;
             hearts.Add(newHeart);
         }
+
+        Debug.Log("Created hearts: " + hearts.Count);
     }
 
     public void UpdateHearts(int currentHealth)
     {
+        Debug.Log("Updating hearts to: " + currentHealth);
+
         for (int i = 0; i < hearts.Count; i++)
         {
             if (i < currentHealth)
