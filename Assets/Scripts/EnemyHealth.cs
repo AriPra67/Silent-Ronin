@@ -16,7 +16,8 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (isDead) return;
+        if (isDead)
+            return;
 
         currentHealth -= damage;
 
@@ -30,36 +31,42 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        if (isDead) return;
+        if (isDead)
+            return;
 
         isDead = true;
 
         Debug.Log("DEATH TRIGGERED");
 
-        // STOP EVERYTHING
-        EnemyAI ai = GetComponent<EnemyAI>();
+        EnemyAI2 ai = GetComponent<EnemyAI2>();
+
         if (ai != null)
             ai.enabled = false;
 
+        Enemy_Patrol patrol = GetComponent<Enemy_Patrol>();
+
+        if (patrol != null)
+            patrol.enabled = false;
+
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
-            rb.simulated = false; // FULL physics stop (no falling)
+            rb.simulated = false;
         }
 
         Collider2D col = GetComponent<Collider2D>();
+
         if (col != null)
             col.enabled = false;
 
-        // FORCE animation (bypasses Animator logic completely)
         if (animator != null)
         {
             animator.enabled = true;
             animator.Play("Death", 0, 0f);
         }
 
-        // delay destroy so you can SEE it
         Invoke(nameof(RemoveEnemy), 2f);
     }
 
