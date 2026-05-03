@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -102,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+
         if (context.performed && !isAttacking)
         {
             animator.SetTrigger("Attack");
@@ -112,6 +115,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack2(InputAction.CallbackContext context)
     {
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+
         if (context.performed && !isAttacking)
         {
             animator.SetTrigger("Attack 2");
@@ -122,6 +127,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack3(InputAction.CallbackContext context)
     {
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+
         if (context.performed && !isAttacking)
         {
             animator.SetTrigger("Attack 3");
@@ -142,6 +149,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerHitbox != null)
             playerHitbox.EndAttack();
+    }
+
+    public void ResetMovement()
+    {
+        isAttacking = false;
+        horizontalMovement = 0f;
+        if (playerHitbox != null) playerHitbox.EndAttack();
     }
 
     private void Flip()
