@@ -13046,7 +13046,7 @@ Transform:
   m_GameObject: {fileID: 1405343340}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04, y: -0.9, z: -10}
+  m_LocalPosition: {x: 3.05, y: 44.63, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13110,10 +13110,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   target: {fileID: 2047961152}
   offset: {x: 0, y: 0, z: -10}
-  minX: -9999
-  maxX: 9999
-  minY: -9999
-  maxY: 9999
+  minX: -4
+  maxX: 3
+  minY: -1
+  maxY: 45
 --- !u!114 &1405343346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13782,7 +13782,7 @@ Transform:
   m_GameObject: {fileID: 1742929606}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.29, y: -1.6286, z: 10}
+  m_LocalPosition: {x: -0.29, y: 0.13, z: 10}
   m_LocalScale: {x: 0.7885185, y: 0.7885185, z: 0.7885185}
   m_ConstrainProportionsScale: 0
   m_Children: []
