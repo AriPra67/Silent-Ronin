@@ -2310,7 +2310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1248848215
 Animator:
   serializedVersion: 7
@@ -2723,7 +2723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1405559302
 Animator:
   serializedVersion: 7
@@ -30877,6 +30877,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 957670534480793189, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 9ef6e9355a03b3041a1840c7fe53ec48, type: 2}
+    - target: {fileID: 957670534480793189, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
       propertyPath: m_Interpolate
       value: 1
       objectReference: {fileID: 0}
@@ -30888,6 +30892,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.7047514
       objectReference: {fileID: 0}
+    - target: {fileID: 1219739291377844544, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 9ef6e9355a03b3041a1840c7fe53ec48, type: 2}
     - target: {fileID: 1219739291377844544, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
       propertyPath: m_Offset.x
       value: 0.025261283
@@ -31442,7 +31450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1870206073
 Animator:
   serializedVersion: 7
