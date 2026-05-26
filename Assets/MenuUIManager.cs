@@ -6,6 +6,7 @@ public class MenuUIManager : MonoBehaviour
 {
     public GameObject usernamePanel;
     public TMP_InputField usernameInput;
+    public GameObject RulesPanel;
 
 
     public void OpenUsernamePanel()
@@ -39,14 +40,28 @@ public class MenuUIManager : MonoBehaviour
     //Settings panel
     public GameObject settingsPanel;
 
+    //Open settings
     public void OpenSettings()
     {
         settingsPanel.SetActive(true);
     }
 
+    //Close Settings
     public void CloseSettings()
     {
         settingsPanel.SetActive(false);
+    }
+
+    // OPEN RULES PANEL
+    public void OpenRules()
+    {
+        RulesPanel.SetActive(true);
+    }
+
+    // CLOSE RULES PANEL
+    public void CloseRules()
+    {
+        RulesPanel.SetActive(false);
     }
 
     //When clicking on 'Exit', the game stops
