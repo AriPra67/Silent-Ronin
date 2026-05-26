@@ -2575,7 +2575,6 @@ GameObject:
   - component: {fileID: 1405343342}
   - component: {fileID: 1405343341}
   - component: {fileID: 1405343344}
-  - component: {fileID: 1405343345}
   - component: {fileID: 1405343346}
   m_Layer: 0
   m_Name: Main Camera
@@ -2703,24 +2702,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &1405343345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1405343340}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d5e16a093d4c9240b670dd5e7c853c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  target: {fileID: 623294607}
-  offset: {x: 0, y: 0, z: -10}
-  minX: 0
-  maxX: 0
-  minY: 0
-  maxY: 0
 --- !u!114 &1405343346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31097,11 +31078,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4394533049985495049, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5243995
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4394533049985495049, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.2487047
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4394533049985495049, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31430,6 +31411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1742929608}
   - component: {fileID: 1742929607}
+  - component: {fileID: 1742929609}
   m_Layer: 0
   m_Name: lvl1background_0
   m_TagString: Untagged
@@ -31491,7 +31473,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 13.44, y: 7.68}
+  m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -31505,12 +31487,28 @@ Transform:
   m_GameObject: {fileID: 1742929606}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0799999, y: 0.7, z: 20}
-  m_LocalScale: {x: 0.8263788, y: 0.8263788, z: 0.8263788}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
+  m_LocalScale: {x: 1, y: 1, z: 0.8263788}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1405343343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1742929609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742929606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b61d39ec4e703469163ce1c32052d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BackgroundFollowY
+  target: {fileID: 1405343343}
+  parallaxX: 0.8
+  zPosition: 10
+  snapAmount: 0.001
 --- !u!1 &1824287973
 GameObject:
   m_ObjectHideFlags: 0

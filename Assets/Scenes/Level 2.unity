@@ -13344,12 +13344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8dfe131afe8d644864c66e078a1ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  target: {fileID: 0}
-  offset: {x: 0, y: 0, z: -10}
-  minX: -9999
-  maxX: 9999
-  minY: -9999
-  maxY: 9999
 --- !u!1 &1424163829
 GameObject:
   m_ObjectHideFlags: 0
@@ -14007,7 +14001,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.29, y: 0.13, z: 10}
-  m_LocalScale: {x: 0.7885185, y: 0.7885185, z: 0.7885185}
+  m_LocalScale: {x: 1, y: 1, z: 0.7885185}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -14353,11 +14347,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4394533049985495049, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.6955237
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4394533049985495049, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.3868153
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4394533049985495049, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}
       propertyPath: m_LocalScale.z
