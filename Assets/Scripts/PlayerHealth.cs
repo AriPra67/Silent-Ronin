@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 3;
-    private int currentHealth;
+    //changed to float - Xi
+    public float maxHealth = 3f;
+    private float currentHealth;
 
     public HealthUI healthUI;
     public Animator animator;
@@ -51,12 +52,13 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    //changed to float not int, for precise enemy damage (won't effect hearts though) - Xi
+    public void TakeDamage(float damage)
     {
         if (isDead || isInvincible) return;
 
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
         Debug.Log("Player HP: " + currentHealth);
 

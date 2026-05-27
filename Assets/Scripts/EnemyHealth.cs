@@ -12,6 +12,9 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        //Adding this for bug - Xi
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
     }
 
     public void TakeDamage(int damage)
@@ -38,10 +41,6 @@ public class EnemyHealth : MonoBehaviour
 
         Debug.Log("DEATH TRIGGERED");
 
-        EnemyAI2 ai = GetComponent<EnemyAI2>();
-
-        if (ai != null)
-            ai.enabled = false;
 
         Enemy_Patrol patrol = GetComponent<Enemy_Patrol>();
 
@@ -54,6 +53,16 @@ public class EnemyHealth : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero;
             rb.simulated = false;
+        }
+
+        //Adding this - Xi
+        Enemy_Attack attack = GetComponentInChildren<Enemy_Attack>();
+
+        if (attack != null)
+        {
+            attack.StopAttacking();
+            attack.enabled = false;
+
         }
 
         Collider2D col = GetComponent<Collider2D>();

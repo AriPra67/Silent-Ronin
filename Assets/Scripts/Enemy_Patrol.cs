@@ -54,10 +54,7 @@ public class Enemy_Patrol : MonoBehaviour
             );
         }
 
-        rb.linearVelocity = new Vector2(
-            dir * speed,
-            0f
-        );
+        rb.linearVelocity = new Vector2(dir * speed, 0f);
 
         if (Mathf.Abs(transform.position.x - target.x) < 0.1f &&
             !isSettingPoint)
@@ -72,14 +69,13 @@ public class Enemy_Patrol : MonoBehaviour
 
         isPaused = true;
 
-        rb.linearVelocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero; 
 
         anim.Play("Idle");
 
         yield return new WaitForSeconds(pauseDuration);
 
-        currentPatrolIndex =
-            (currentPatrolIndex + 1) % patrolPoints.Length;
+        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
 
         target = patrolPoints[currentPatrolIndex];
 
