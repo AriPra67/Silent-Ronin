@@ -4,17 +4,25 @@ public class EnemyShooting : MonoBehaviour
 {
     public GameObject bullet;
     public Transform bulletpos;
+    public Transform player;
+
+    public float attackRange = 3f;
 
     private float timer;
 
     void Update()
     {
-        timer += Time.deltaTime;
+        float distance = Vector2.Distance(transform.position, player.position);
 
-        if (timer > 2f)
+        if (distance <= attackRange)
         {
-            timer = 0f;
-            Shoot();
+            timer += Time.deltaTime;
+
+            if (timer > 2f)
+            {
+                timer = 0f;
+                Shoot();
+            }
         }
     }
 
