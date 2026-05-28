@@ -1,27 +1,38 @@
 using UnityEngine;
+using TMPro;
+using System.Collections.Generic;
 
 public class Checkpoint : MonoBehaviour
 {
     private bool isActivated = false;
-    public Animator animator; // Optional: if you have a flag-raising animation
+
+    [Header("UI Feedback")]
+    public TextMeshProUGUI notificationText;
+    public float displayDuration = 1.5f;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Make sure it's the player touching the checkpoint
         if (other.CompareTag("Player") && !isActivated)
         {
             isActivated = true;
-
-            // Tell the GameManager to save this exact position
             GameManager.Instance.UpdateCheckpoint(transform.position);
 
-            // Optional visual feedback
-            if (animator != null)
+            if (notificationText != null)
             {
-                animator.SetTrigger("Activate");
+                notificationText.gameObject.SetActive(true);
+
+                Invoke("HideNotification", displayDuration);
             }
 
-            Debug.Log("Checkpoint Activated at: " + transform.position);
+            Debug.Log("Checkpoint Activated!");
+        }
+    }
+
+    void HideNotification()
+    {
+        if (notificationText != null)
+        {
+            notificationText.gameObject.SetActive(false);
         }
     }
 }
