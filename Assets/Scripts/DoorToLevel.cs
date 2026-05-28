@@ -20,6 +20,13 @@ public class DoorToLevel : MonoBehaviour
     {
         if (doorPrompt != null)
             doorPrompt.SetActive(false);
+
+        if (fadeImage != null)
+        {
+            Color c = fadeImage.color;
+            c.a = 0f;
+            fadeImage.color = c;
+        }
     }
 
     void Update()
@@ -53,23 +60,27 @@ public class DoorToLevel : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.GetComponentInParent<PlayerMovement>() != null)
         {
             playerNearby = true;
 
             if (doorPrompt != null)
                 doorPrompt.SetActive(true);
+
+            Debug.Log("Player entered door trigger");
         }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.GetComponentInParent<PlayerMovement>() != null)
         {
             playerNearby = false;
 
             if (doorPrompt != null)
                 doorPrompt.SetActive(false);
+
+            Debug.Log("Player left door trigger");
         }
     }
 }
