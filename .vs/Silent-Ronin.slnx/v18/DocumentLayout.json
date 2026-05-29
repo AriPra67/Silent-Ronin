@@ -3,44 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\yanf4\\downloads\\silent-ronin\\assets\\scripts\\enemyai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemyai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\yanf4\\downloads\\silent-ronin\\assets\\scripts\\enemyhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemyhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\yanf4\\downloads\\silent-ronin\\assets\\scripts\\enemy_patrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy_patrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\yanf4\\downloads\\silent-ronin\\assets\\scripts\\playerhitbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerhitbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\yanf4\\downloads\\silent-ronin\\assets\\scripts\\puzzle_heal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\puzzle_heal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\yanf4\\downloads\\silent-ronin\\assets\\scripts\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Library\\PackageCache\\com.unity.inputsystem@57d0e36f6123\\InputSystem\\Plugins\\PlayerInput\\PlayerInput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.inputsystem@57d0e36f6123\\InputSystem\\Plugins\\PlayerInput\\PlayerInput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\yanf4\\downloads\\silent-ronin\\assets\\scripts\\enemyhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemyhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\yanf4\\downloads\\silent-ronin\\assets\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\yanf4\\downloads\\silent-ronin\\assets\\scripts\\playerhitbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerhitbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\yanf4\\downloads\\silent-ronin\\assets\\scripts\\enemyhitbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemyhitbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Enemy_Attack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Enemy_Attack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\EnemyAI2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\EnemyAI2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\yanf4\\downloads\\silent-ronin\\assets\\scripts\\playerattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:2:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\EnemyAI2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:2:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\EnemyAI2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:2:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Enemy_Attack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:2:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Enemy_Attack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,92 +38,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Enemy_Patrol.cs",
-              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Enemy_Patrol.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy_Patrol.cs",
-              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Enemy_Patrol.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Enemy_Patrol.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAAAFcAAAAaAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "Puzzle_Heal.cs",
+              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Puzzle_Heal.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Puzzle_Heal.cs",
+              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Puzzle_Heal.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Puzzle_Heal.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-03T15:58:30.692Z",
-              "IsPinned": true
+              "WhenOpened": "2026-05-29T04:29:26.125Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "PlayerHealth.cs",
               "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\PlayerHealth.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerHealth.cs",
               "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\PlayerHealth.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerHealth.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAAAGsAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-03T16:47:45.973Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PlayerInput.cs",
-              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Library\\PackageCache\\com.unity.inputsystem@57d0e36f6123\\InputSystem\\Plugins\\PlayerInput\\PlayerInput.cs",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.inputsystem@57d0e36f6123\\InputSystem\\Plugins\\PlayerInput\\PlayerInput.cs",
-              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Library\\PackageCache\\com.unity.inputsystem@57d0e36f6123\\InputSystem\\Plugins\\PlayerInput\\PlayerInput.cs",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.inputsystem@57d0e36f6123\\InputSystem\\Plugins\\PlayerInput\\PlayerInput.cs",
-              "ViewState": "AgIAANoIAAAAAAAAAAAQwPoIAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-03T16:47:19.695Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PlayerMovement.cs",
-              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\PlayerMovement.cs",
-              "RelativeDocumentMoniker": "Assets\\PlayerMovement.cs",
-              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\PlayerMovement.cs",
-              "RelativeToolTip": "Assets\\PlayerMovement.cs",
-              "ViewState": "AgIAAI8AAAAAAAAAAAAuwK0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-03T16:46:41.373Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EnemyHealth.cs",
-              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\EnemyHealth.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyHealth.cs",
-              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\EnemyHealth.cs",
-              "RelativeToolTip": "Assets\\Scripts\\EnemyHealth.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAAAEwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-03T09:43:39.251Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Enemyhitbox.cs",
-              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Enemyhitbox.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemyhitbox.cs",
-              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Enemyhitbox.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Enemyhitbox.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABoAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-03T16:30:09.029Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EnemyAI.cs",
-              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\EnemyAI.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyAI.cs",
-              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\EnemyAI.cs",
-              "RelativeToolTip": "Assets\\Scripts\\EnemyAI.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T06:39:06.902Z",
+              "WhenOpened": "2026-05-29T01:26:04.322Z",
               "EditorCaption": ""
             },
             {
@@ -146,34 +74,60 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerHitbox.cs",
               "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\PlayerHitbox.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerHitbox.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAuwCEAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAACkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-03T16:49:06.86Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "EnemyAI2.cs",
-              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\EnemyAI2.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyAI2.cs",
-              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\EnemyAI2.cs",
-              "RelativeToolTip": "Assets\\Scripts\\EnemyAI2.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T06:44:34.504Z",
+              "WhenOpened": "2026-05-29T01:39:35.502Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "EnemyAI2.cs",
-              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\EnemyAI2.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyAI2.cs",
-              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\EnemyAI2.cs",
-              "RelativeToolTip": "Assets\\Scripts\\EnemyAI2.cs",
-              "ViewState": "AgIAALEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "EnemyHealth.cs",
+              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\EnemyHealth.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyHealth.cs",
+              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\EnemyHealth.cs",
+              "RelativeToolTip": "Assets\\Scripts\\EnemyHealth.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAuwFUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-03T23:25:00.419Z"
+              "WhenOpened": "2026-05-03T09:43:39.251Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Enemy_Attack.cs",
+              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Enemy_Attack.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy_Attack.cs",
+              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Enemy_Attack.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemy_Attack.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAAwGAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-29T04:27:38.69Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Playerattack.cs",
+              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Playerattack.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Playerattack.cs",
+              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Playerattack.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Playerattack.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-29T01:38:49.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Enemy_Attack.cs",
+              "DocumentMoniker": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Enemy_Attack.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy_Attack.cs",
+              "ToolTip": "C:\\Users\\yanf4\\Downloads\\Silent-Ronin\\Assets\\Scripts\\Enemy_Attack.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemy_Attack.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAuwGAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-28T17:55:08.172Z"
             }
           ]
         }

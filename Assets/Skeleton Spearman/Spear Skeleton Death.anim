@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skeleton Spearman death
+  m_Name: Spear Skeleton Death
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -22,13 +22,13 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 2649847697073447219, guid: 45b7948e9b6612c4cb97469e99c04a2b, type: 3}
-    - time: 0.13333334
+    - time: 0.18333334
       value: {fileID: -8293461521501190705, guid: 45b7948e9b6612c4cb97469e99c04a2b, type: 3}
-    - time: 0.3
+    - time: 0.36666667
       value: {fileID: -1631342717326862633, guid: 45b7948e9b6612c4cb97469e99c04a2b, type: 3}
     - time: 0.56666666
       value: {fileID: -3927913518680497933, guid: 45b7948e9b6612c4cb97469e99c04a2b, type: 3}
-    - time: 1.3666667
+    - time: 0.75
       value: {fileID: -1057675302478342458, guid: 45b7948e9b6612c4cb97469e99c04a2b, type: 3}
     attribute: m_Sprite
     path: 
@@ -62,7 +62,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.3833333
+    m_StopTime: 0.76666665
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

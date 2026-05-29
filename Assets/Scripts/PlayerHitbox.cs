@@ -11,13 +11,20 @@ public class PlayerHitbox : MonoBehaviour
 
         if (!attackMode) return;
 
-        //Changed this - Xi
         EnemyHealth enemy = other.transform.GetComponentInParent<EnemyHealth>();
-
         if (enemy != null)
         {
             Debug.Log("ENEMY HIT!");
             enemy.TakeDamage(damage);
+            return;
+        }
+
+        PuzzleGiveHealth puzzle = other.transform.GetComponentInParent<PuzzleGiveHealth>();
+        if (puzzle != null)
+        {
+            Debug.Log("PUZZLE OBJECT HIT!");
+            puzzle.TakeDamage(damage);
+            return;
         }
     }
 

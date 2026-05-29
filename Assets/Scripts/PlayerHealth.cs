@@ -71,11 +71,33 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-        if (animator != null)
-            animator.SetTrigger("Hurt");
+
 
         StartCoroutine(Invincibility());
     }
+
+    public void Heal(float heal)
+    {
+        if (isDead || isInvincible) return;
+
+        currentHealth += heal;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        Debug.Log("Player HP: " + currentHealth);
+
+        if (healthUI != null)
+            healthUI.UpdateHearts(currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+            return;
+        }
+
+        
+    }
+
+
 
     void Die()
     {
