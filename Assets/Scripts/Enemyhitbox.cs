@@ -4,51 +4,20 @@ public class EnemyHitbox : MonoBehaviour
 {
     public int damage = 1;
 
-    private EnemyAI2 ai;
-    private bool playerInside;
-
-    void Awake()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        ai = GetComponentInParent<EnemyAI2>();
-    }
+        Debug.Log("ENEMY HITBOX TOUCHED: " + other.name);
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
         PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
 
         if (player != null)
         {
-            playerInside = true;
-
-            ai?.SetPlayerInHitbox(true);
-
+            Debug.Log("PLAYER FOUND - DAMAGE");
             player.TakeDamage(damage);
         }
-    }
-
-    void OnTriggerStay2D(Collider2D other)
-    {
-        PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
-
-        if (player != null)
+        else
         {
-            if (!playerInside)
-            {
-                playerInside = true;
-                ai?.SetPlayerInHitbox(true);
-            }
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
-
-        if (player != null)
-        {
-            playerInside = false;
-
-            ai?.SetPlayerInHitbox(false);
+            Debug.Log("NO PlayerHealth found on " + other.name);
         }
     }
 }
