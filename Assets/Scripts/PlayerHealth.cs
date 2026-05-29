@@ -3,26 +3,21 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("Settings")]
-    public int maxHealth = 3;
-    public float invincibleTime = 0.2f;
+    //changed to float - Xi
+    public float maxHealth = 3f;
+    private float currentHealth;
 
-    [Header("References")]
     public HealthUI healthUI;
     public Animator animator;
     public PlayerMovement movement;
-    public GameObject gameOverUI;
 
-    private int currentHealth;
     private bool isDead;
     private bool isInvincible;
-    private Vector3 startPosition;
-    private Rigidbody2D rb;
+
+    public float invincibleTime = 0.2f;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-
         if (animator == null)
             animator = GetComponent<Animator>();
 
@@ -36,32 +31,36 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        startPosition = transform.position;
 
         if (healthUI != null)
         {
             healthUI.SetMaxHearts(maxHealth);
             healthUI.UpdateHearts(currentHealth);
         }
+        else
+        {
+            Debug.LogWarning("HealthUI NOT FOUND");
+        }
     }
 
     void Update()
     {
-
-        if (Time.timeScale == 0) return;
-
+        // 🔥 PRESS H TO TAKE DAMAGE
         if (Input.GetKeyDown(KeyCode.H))
         {
             TakeDamage(1);
         }
     }
 
-    public void TakeDamage(int damage)
+    //changed to float not int, for precise enemy damage (won't effect hearts though) - Xi
+    public void TakeDamage(float damage)
     {
         if (isDead || isInvincible) return;
 
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        Debug.Log("Player HP: " + currentHealth);
 
         if (healthUI != null)
             healthUI.UpdateHearts(currentHealth);
@@ -72,21 +71,45 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-        if (animator != null)
-            animator.SetTrigger("Hurt");
+
 
         StartCoroutine(Invincibility());
     }
+
+    public void Heal(float heal)
+    {
+        if (isDead || isInvincible) return;
+
+        currentHealth += heal;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        Debug.Log("Player HP: " + currentHealth);
+
+        if (healthUI != null)
+            healthUI.UpdateHearts(currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+            return;
+        }
+
+        
+    }
+
+
 
     void Die()
     {
         if (isDead) return;
 
         isDead = true;
+        Debug.Log("PLAYER DEAD");
 
         if (movement != null)
             movement.enabled = false;
 
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
@@ -97,46 +120,6 @@ public class PlayerHealth : MonoBehaviour
         {
             animator.ResetTrigger("Hurt");
             animator.Play("Samurai die");
-        }
-
-        if (gameOverUI != null)
-        {
-            gameOverUI.SetActive(true);
-        }
-    }
-
-    public void Respawn()
-    {
-        isDead = false;
-        currentHealth = maxHealth;
-
-        if (gameOverUI != null)
-            gameOverUI.SetActive(false);
-
-        
-        transform.position = GameManager.Instance.GetRespawnPosition(startPosition);
-
-        if (rb != null)
-        {
-            rb.simulated = true;
-            rb.gravityScale = (movement != null) ? movement.baseGravity : 1f;
-            rb.linearVelocity = Vector2.zero;
-        }
-
-        if (movement != null)
-        {
-            movement.enabled = true;
-            movement.ResetMovement();
-        }
-
-        if (healthUI != null)
-            healthUI.UpdateHearts(currentHealth);
-
-        if (animator != null)
-        {
-            animator.Rebind();
-            animator.Update(0f);
-            animator.Play("Idle");
         }
     }
 

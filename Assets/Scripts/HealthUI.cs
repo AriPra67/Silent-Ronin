@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class HealthUI : MonoBehaviour
 
     private List<Image> hearts = new List<Image>();
 
-    public void SetMaxHearts(int maxHearts)
+    public void SetMaxHearts(float maxHearts)
     {
         foreach (Image heart in hearts)
         {
@@ -30,7 +31,7 @@ public class HealthUI : MonoBehaviour
         Debug.Log("Created hearts: " + hearts.Count);
     }
 
-    public void UpdateHearts(int currentHealth)
+    public void UpdateHearts(float currentHealth)
     {
         Debug.Log("Updating hearts to: " + currentHealth);
 
@@ -48,4 +49,5 @@ public class HealthUI : MonoBehaviour
             }
         }
     }
+
 }
