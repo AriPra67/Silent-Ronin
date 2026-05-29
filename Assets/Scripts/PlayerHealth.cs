@@ -113,7 +113,8 @@ public class PlayerHealth : MonoBehaviour
         if (gameOverUI != null)
             gameOverUI.SetActive(false);
 
-        transform.position = startPosition;
+        
+        transform.position = GameManager.Instance.GetRespawnPosition(startPosition);
 
         if (rb != null)
         {
