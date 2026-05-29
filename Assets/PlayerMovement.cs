@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -70,10 +69,7 @@ public class PlayerMovement : MonoBehaviour
         if (rb.linearVelocity.y < 0)
         {
             rb.gravityScale = baseGravity * fallGravityMult;
-            rb.linearVelocity = new Vector2(
-                rb.linearVelocity.x,
-                Mathf.Max(rb.linearVelocity.y, -maxFallSpeed)
-            );
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -maxFallSpeed));
         }
         else
         {
@@ -83,12 +79,8 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleAnimations()
     {
-        bool grounded = IsGrounded();
-
         animator.SetFloat("yVelocity", rb.linearVelocity.y);
         animator.SetFloat("magnitude", Mathf.Abs(horizontalMovement));
-        animator.SetBool("isJumping", !grounded);
-        animator.SetBool("isGrounded", grounded);
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -101,25 +93,15 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && IsGrounded() && !isAttacking)
-        {
+        if (context.performed && IsGrounded())
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-            animator.SetTrigger("Jump");
-        }
 
         if (context.canceled && rb.linearVelocity.y > 0)
-        {
-            rb.linearVelocity = new Vector2(
-                rb.linearVelocity.x,
-                rb.linearVelocity.y * 0.5f
-            );
-        }
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
     }
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
-
         if (context.performed && !isAttacking)
         {
             animator.SetTrigger("Attack");
@@ -130,8 +112,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack2(InputAction.CallbackContext context)
     {
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
-
         if (context.performed && !isAttacking)
         {
             animator.SetTrigger("Attack 2");
@@ -142,8 +122,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack3(InputAction.CallbackContext context)
     {
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
-
         if (context.performed && !isAttacking)
         {
             animator.SetTrigger("Attack 3");
@@ -166,19 +144,9 @@ public class PlayerMovement : MonoBehaviour
             playerHitbox.EndAttack();
     }
 
-    public void ResetMovement()
-    {
-        isAttacking = false;
-        horizontalMovement = 0f;
-
-        if (playerHitbox != null)
-            playerHitbox.EndAttack();
-    }
-
     private void Flip()
     {
         facingRight = !facingRight;
-
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;

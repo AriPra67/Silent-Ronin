@@ -39,13 +39,11 @@ public class MenuUIManager : MonoBehaviour
     //Settings panel
     public GameObject settingsPanel;
 
-    //Open settings
     public void OpenSettings()
     {
         settingsPanel.SetActive(true);
     }
 
-    //Close Settings
     public void CloseSettings()
     {
         settingsPanel.SetActive(false);
