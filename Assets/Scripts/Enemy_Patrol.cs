@@ -8,7 +8,7 @@ public class Enemy_Patrol : MonoBehaviour
     private bool isPaused;
 
     public Vector2[] patrolPoints;
-    public float speed = 2f;
+    public float speed = 2;
     public float pauseDuration = 1.5f;
 
     private Rigidbody2D rb;
@@ -25,9 +25,7 @@ public class Enemy_Patrol : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         visual = anim.transform;
 
-        if (patrolPoints.Length > 0)
-            target = patrolPoints[0];
-
+        target = patrolPoints[0];
         StartCoroutine(SetPatrolPoint());
     }
 
@@ -42,22 +40,16 @@ public class Enemy_Patrol : MonoBehaviour
             return;
         }
 
-        float dir = Mathf.Sign(target.x - transform.position.x);
+        Vector2 direction = ((Vector3)target - transform.position).normalized;
 
-        if (dir < 0 && visual.localScale.x > 0 ||
-            dir > 0 && visual.localScale.x < 0)
+        if (direction.x < 0 && visual.localScale.x > 0 || direction.x > 0 && visual.localScale.x < 0)
         {
-            visual.localScale = new Vector3(
-                visual.localScale.x * -1,
-                visual.localScale.y,
-                visual.localScale.z
-            );
+            visual.localScale = new Vector3(visual.localScale.x * -1, visual.localScale.y, visual.localScale.z);
         }
 
-        rb.linearVelocity = new Vector2(dir * speed, 0f);
+        rb.linearVelocity = direction * speed;
 
-        if (Mathf.Abs(transform.position.x - target.x) < 0.1f &&
-            !isSettingPoint)
+        if (Vector2.Distance(transform.position, target) < .1f && !isSettingPoint)
         {
             StartCoroutine(SetPatrolPoint());
         }
@@ -68,19 +60,13 @@ public class Enemy_Patrol : MonoBehaviour
         isSettingPoint = true;
 
         isPaused = true;
-
-        rb.linearVelocity = Vector2.zero; 
-
         anim.Play("Idle");
-
         yield return new WaitForSeconds(pauseDuration);
 
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-
         target = patrolPoints[currentPatrolIndex];
 
         isPaused = false;
-
         anim.Play("Walk");
 
         isSettingPoint = false;
