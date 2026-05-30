@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class EnemyBulletScript : MonoBehaviour
 {
-    private GameObject player;
     private Rigidbody2D rb;
 
     public float force = 5f;
@@ -12,11 +11,13 @@ public class EnemyBulletScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        Vector3 direction = player.transform.position - transform.position;
-
-        rb.linearVelocity = new Vector2(direction.x, direction.y).normalized * force;
+        if (player != null && rb != null)
+        {
+            Vector2 direction = (player.transform.position - transform.position).normalized;
+            rb.linearVelocity = direction * force;
+        }
 
         Destroy(gameObject, 3f);
     }
@@ -31,9 +32,10 @@ public class EnemyBulletScript : MonoBehaviour
         {
             playerHealth.TakeDamage(damage);
             Destroy(gameObject);
+            return;
         }
 
-        if (other.CompareTag("Ground"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Building"))
         {
             Destroy(gameObject);
         }
