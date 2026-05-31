@@ -20,12 +20,15 @@ public class EnemyAI : MonoBehaviour
     public LayerMask groundLayer;
     public Vector2 groundSize = new Vector2(0.5f, 0.2f);
 
-    [Header("Wall / Platform Check")]
+    [Header("Wall Check")]
     public Transform wallCheck;
     public float wallCheckDistance = 0.6f;
 
     [Header("Attack")]
+    public float attackCooldown = 1.2f;
     public float attackDuration = 0.4f;
+
+    private float attackCooldownTimer;
     private float attackTimer;
 
     private bool isGrounded;
@@ -56,6 +59,9 @@ public class EnemyAI : MonoBehaviour
 
         CheckGround();
 
+        if (attackCooldownTimer > 0f)
+            attackCooldownTimer -= Time.deltaTime;
+
         if (player == null)
         {
             Idle();
@@ -68,20 +74,20 @@ public class EnemyAI : MonoBehaviour
             attackTimer -= Time.deltaTime;
 
             if (attackTimer <= 0f)
-                ResetAttack();
+                StopAttack();
 
             UpdateAnimation();
             return;
         }
 
-        float dist = Vector2.Distance(transform.position, player.position);
+        float distance = Vector2.Distance(transform.position, player.position);
         float heightDiff = player.position.y - transform.position.y;
 
-        if (dist <= attackDistance)
+        if (distance <= attackDistance && attackCooldownTimer <= 0f)
         {
-            Attack();
+            StartAttack();
         }
-        else if (dist <= chaseDistance)
+        else if (distance <= chaseDistance)
         {
             Chase(heightDiff);
         }
@@ -137,32 +143,27 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void Flip(float dir)
-    {
-        if (dir == 0) return;
-
-        Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * dir;
-        transform.localScale = scale;
-    }
-
-    void Attack()
+    void StartAttack()
     {
         isAttacking = true;
         attackTimer = attackDuration;
+        attackCooldownTimer = attackCooldown;
 
         rb.linearVelocity = Vector2.zero;
 
         if (animator != null)
-            animator.SetTrigger("Attack");
+            animator.SetBool("attack", true);
 
         if (hitbox != null)
             hitbox.SetActive(true);
     }
 
-    void ResetAttack()
+    void StopAttack()
     {
         isAttacking = false;
+
+        if (animator != null)
+            animator.SetBool("attack", false);
 
         if (hitbox != null)
             hitbox.SetActive(false);
@@ -171,6 +172,15 @@ public class EnemyAI : MonoBehaviour
     void Idle()
     {
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+    }
+
+    void Flip(float dir)
+    {
+        if (dir == 0) return;
+
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * dir;
+        transform.localScale = scale;
     }
 
     void UpdateAnimation()
