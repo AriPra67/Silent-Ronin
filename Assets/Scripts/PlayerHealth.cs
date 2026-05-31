@@ -14,6 +14,8 @@ public class PlayerHealth : MonoBehaviour
     private bool isDead;
     private bool isInvincible;
 
+    private Vector3 startPosition;
+
     public float invincibleTime = 0.2f;
 
     void Awake()
@@ -30,6 +32,8 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
+        startPosition = transform.position;
+
         currentHealth = maxHealth;
 
         if (healthUI != null)
@@ -71,8 +75,6 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-
-
         StartCoroutine(Invincibility());
     }
 
@@ -93,11 +95,7 @@ public class PlayerHealth : MonoBehaviour
             Die();
             return;
         }
-
-        
     }
-
-
 
     void Die()
     {
@@ -121,6 +119,36 @@ public class PlayerHealth : MonoBehaviour
             animator.ResetTrigger("Hurt");
             animator.Play("Samurai die");
         }
+    }
+
+    public void Respawn()
+    {
+        isDead = false;
+
+        currentHealth = maxHealth;
+
+        if (healthUI != null)
+            healthUI.UpdateHearts(currentHealth);
+
+        Vector3 respawnPosition =
+            GameManager.Instance.GetRespawnPosition(startPosition);
+
+        transform.position = respawnPosition;
+
+        if (movement != null)
+            movement.enabled = true;
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+
+            if (movement != null)
+                rb.gravityScale = movement.baseGravity;
+        }
+
+        if (animator != null)
+            animator.Play("Idle");
     }
 
     IEnumerator Invincibility()

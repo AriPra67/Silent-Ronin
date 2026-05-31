@@ -1858,6 +1858,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1139824891219967639, guid: 9e5549417c2e6c74d88858a9d7cdc59a, type: 3}
+      propertyPath: healInterval
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5328567414935165910, guid: 9e5549417c2e6c74d88858a9d7cdc59a, type: 3}
       propertyPath: m_Name
       value: Tree Puzzle
@@ -2263,22 +2267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7bbdc96104cc54590867e051894476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  player: {fileID: 623294607}
-  rb: {fileID: 1405559305}
-  animator: {fileID: 1405559302}
-  hitbox: {fileID: 0}
-  speed: 2
-  jumpForce: 8
-  chaseDistance: 8
-  attackDistance: 1.5
-  groundCheck: {fileID: 1046346113}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  groundSize: {x: 0.5, y: 0.2}
-  wallCheck: {fileID: 796023660}
-  wallCheckDistance: 0.6
-  attackDuration: 0.4
 --- !u!114 &1405559309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30088,11 +30076,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1600987111 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5725942670094795625, guid: 8b3e9c1136af8034f9f18e3ec6fb6144, type: 3}
-  m_PrefabInstance: {fileID: 8565540096500604614}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1658544737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30768,11 +30751,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 5
-  invincibleTime: 1
   healthUI: {fileID: 710299673}
   animator: {fileID: 2031428249}
   movement: {fileID: 0}
-  gameOverUI: {fileID: 1600987111}
+  invincibleTime: 1
 --- !u!114 &2031428248 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3592394228873683443, guid: 4bb34485deb222246b16de49df1a95c4, type: 3}

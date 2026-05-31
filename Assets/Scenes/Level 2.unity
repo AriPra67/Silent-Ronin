@@ -168,11 +168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 3
-  invincibleTime: 1
   healthUI: {fileID: 712922993}
   animator: {fileID: 2047961146}
   movement: {fileID: 2047961149}
-  gameOverUI: {fileID: 1062910108}
+  invincibleTime: 1
 --- !u!114 &131352854 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 499940287180727602, guid: 50b9ae065d39fb2468be8f9965669a76, type: 3}
@@ -6185,7 +6184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1823723600850279478, guid: 81a2e03b6fe097e46a1ee612ffdaf56e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.27
+      value: 9.48
       objectReference: {fileID: 0}
     - target: {fileID: 1823723600850279478, guid: 81a2e03b6fe097e46a1ee612ffdaf56e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6377,6 +6376,10 @@ PrefabInstance:
     - target: {fileID: 402974133219329996, guid: 7bb4f0d9615e39540a4c7d48fc58456e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811499398392789599, guid: 7bb4f0d9615e39540a4c7d48fc58456e, type: 3}
+      propertyPath: healInterval
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6489856934120622853, guid: 7bb4f0d9615e39540a4c7d48fc58456e, type: 3}
       propertyPath: m_Name
@@ -13276,22 +13279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7bbdc96104cc54590867e051894476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  player: {fileID: 2047961152}
-  rb: {fileID: 1036751623}
-  animator: {fileID: 1036751620}
-  hitbox: {fileID: 547686841}
-  speed: 2
-  jumpForce: 8
-  chaseDistance: 8
-  attackDistance: 1.5
-  groundCheck: {fileID: 1295670801}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  groundSize: {x: 0.5, y: 0.2}
-  wallCheck: {fileID: 0}
-  wallCheckDistance: 0.6
-  attackDuration: 0.4
 --- !u!50 &1036751623
 Rigidbody2D:
   serializedVersion: 5
@@ -13365,11 +13352,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.32667902, y: 0.88}
   m_EdgeRadius: 0
---- !u!1 &1062910108 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5725942670094795625, guid: 8b3e9c1136af8034f9f18e3ec6fb6144, type: 3}
-  m_PrefabInstance: {fileID: 1879414016}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1101568890 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 473629347076078827, guid: 8b3e9c1136af8034f9f18e3ec6fb6144, type: 3}
@@ -13887,22 +13869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7bbdc96104cc54590867e051894476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  player: {fileID: 2047961152}
-  rb: {fileID: 1424163833}
-  animator: {fileID: 1424163832}
-  hitbox: {fileID: 184196641}
-  speed: 2
-  jumpForce: 8
-  chaseDistance: 8
-  attackDistance: 1.5
-  groundCheck: {fileID: 1982101557}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  groundSize: {x: 0.5, y: 0.2}
-  wallCheck: {fileID: 1801251639}
-  wallCheckDistance: 0.6
-  attackDuration: 0.4
 --- !u!114 &1424163835
 MonoBehaviour:
   m_ObjectHideFlags: 0

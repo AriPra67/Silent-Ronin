@@ -16,17 +16,19 @@ public class Puzzle_Heal: MonoBehaviour
 
     void Start()
     {
-        enemyRb = GetComponentInParent<Rigidbody2D>();
-        anim = GetComponentInParent<Animator>();
+
 
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Entered: " + other.name);
+
         if (!other.CompareTag("Player"))
             return;
 
         playerTarget = other.transform;
+        Debug.Log("Player!");
 
         if (healRoutine == null)
             healRoutine = StartCoroutine(HealLoop());
@@ -49,6 +51,8 @@ public class Puzzle_Heal: MonoBehaviour
 
     IEnumerator HealLoop()
     {
+        Debug.Log("Heal Loop Started");
+
         while (playerTarget != null)
         {
 

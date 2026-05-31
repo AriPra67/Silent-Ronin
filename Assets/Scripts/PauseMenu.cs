@@ -38,7 +38,7 @@ public class PauseMenu : MonoBehaviour
 
         if (movement != null)
         {
-            movement.ResetMovement();
+            movement.rb.linearVelocity = Vector2.zero;
         }
     }
 

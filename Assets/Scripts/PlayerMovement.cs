@@ -77,9 +77,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //No yvelocity, animator parameter didn't exist? Replacing this method for now - Xi
     void HandleAnimations()
     {
-        animator.SetFloat("yVelocity", rb.linearVelocity.y);
         animator.SetFloat("magnitude", Mathf.Abs(horizontalMovement));
     }
 
@@ -150,6 +150,16 @@ public class PlayerMovement : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+    public void ResetMovement()
+    {
+        horizontalMovement = 0f;
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 
     private bool IsGrounded()
