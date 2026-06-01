@@ -7,6 +7,13 @@ public class EnemyAI2 : MonoBehaviour
     public Animator animator;
     public GameObject hitbox;
 
+    private bool playerInHitbox;
+
+    public void SetPlayerInHitbox(bool value)
+    {
+        playerInHitbox = value;
+    }
+
     [Header("Movement")]
     public float speed = 2f;
     public float jumpForce = 8f;
@@ -26,14 +33,10 @@ public class EnemyAI2 : MonoBehaviour
 
     [Header("Attack")]
     public float attackDuration = 0.4f;
-
     private float attackTimer;
 
     private bool isGrounded;
     private bool isAttacking;
-
-    private Enemy_Patrol patrol;
-    private Transform visual;
 
     void Awake()
     {
@@ -41,20 +44,14 @@ public class EnemyAI2 : MonoBehaviour
             rb = GetComponent<Rigidbody2D>();
 
         if (animator == null)
-            animator = GetComponentInChildren<Animator>();
+            animator = GetComponent<Animator>();
 
         if (player == null)
         {
             GameObject foundPlayer = GameObject.FindGameObjectWithTag("Player");
-
             if (foundPlayer != null)
                 player = foundPlayer.transform;
         }
-
-        patrol = GetComponent<Enemy_Patrol>();
-
-        if (animator != null)
-            visual = animator.transform;
 
         if (hitbox != null)
             hitbox.SetActive(false);
@@ -62,31 +59,14 @@ public class EnemyAI2 : MonoBehaviour
 
     void Update()
     {
-        if (rb == null)
-            return;
+        if (rb == null) return;
 
         CheckGround();
 
         if (player == null)
         {
-            if (patrol != null)
-                patrol.isOverridden = false;
-
-            return;
-        }
-
-        float dist = Vector2.Distance(transform.position, player.position);
-
-        if (dist <= chaseDistance)
-        {
-            if (patrol != null)
-                patrol.isOverridden = true;
-        }
-        else
-        {
-            if (patrol != null)
-                patrol.isOverridden = false;
-
+            Idle();
+            UpdateAnimation();
             return;
         }
 
@@ -97,18 +77,24 @@ public class EnemyAI2 : MonoBehaviour
             if (attackTimer <= 0f)
                 ResetAttack();
 
+            UpdateAnimation();
             return;
         }
 
+        float dist = Vector2.Distance(transform.position, player.position);
         float heightDiff = player.position.y - transform.position.y;
 
         if (dist <= attackDistance)
         {
             Attack();
         }
-        else
+        else if (dist <= chaseDistance)
         {
             Chase(heightDiff);
+        }
+        else
+        {
+            Idle();
         }
 
         UpdateAnimation();
@@ -154,39 +140,28 @@ public class EnemyAI2 : MonoBehaviour
 
         if (isGrounded && (heightDiff > 1f || touchingWall))
         {
-            rb.linearVelocity = new Vector2(
-                rb.linearVelocity.x,
-                jumpForce
-            );
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
     }
 
     void Flip(float dir)
     {
-        if (dir == 0 || visual == null)
-            return;
+        if (dir == 0) return;
 
-        if (dir < 0 && visual.localScale.x > 0 ||
-            dir > 0 && visual.localScale.x < 0)
-        {
-            visual.localScale = new Vector3(
-                visual.localScale.x * -1,
-                visual.localScale.y,
-                visual.localScale.z
-            );
-        }
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * dir;
+        transform.localScale = scale;
     }
 
     void Attack()
     {
         isAttacking = true;
-
         attackTimer = attackDuration;
 
         rb.linearVelocity = Vector2.zero;
 
         if (animator != null)
-            animator.Play("attack1");
+            animator.SetTrigger("Attack");
 
         if (hitbox != null)
             hitbox.SetActive(true);
@@ -200,20 +175,17 @@ public class EnemyAI2 : MonoBehaviour
             hitbox.SetActive(false);
     }
 
+    void Idle()
+    {
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+    }
+
     void UpdateAnimation()
     {
-        if (animator == null || rb == null)
-            return;
+        if (animator == null || rb == null) return;
 
-        animator.SetFloat(
-            "magnitude",
-            Mathf.Abs(rb.linearVelocity.x)
-        );
-
-        animator.SetBool(
-            "isGrounded",
-            isGrounded
-        );
+        animator.SetFloat("magnitude", Mathf.Abs(rb.linearVelocity.x));
+        animator.SetBool("isGrounded", isGrounded);
     }
 
     void OnDrawGizmos()
@@ -221,21 +193,14 @@ public class EnemyAI2 : MonoBehaviour
         if (groundCheck != null)
         {
             Gizmos.color = Color.green;
-
-            Gizmos.DrawWireCube(
-                groundCheck.position,
-                groundSize
-            );
+            Gizmos.DrawWireCube(groundCheck.position, groundSize);
         }
 
         if (wallCheck != null)
         {
             Gizmos.color = Color.red;
 
-            Vector3 dir =
-                transform.localScale.x >= 0
-                ? Vector3.right
-                : Vector3.left;
+            Vector3 dir = transform.localScale.x >= 0 ? Vector3.right : Vector3.left;
 
             Gizmos.DrawLine(
                 wallCheck.position,
