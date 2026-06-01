@@ -2547,6 +2547,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 1
   animator: {fileID: 0}
+  heartDropPrefab: {fileID: 0}
+  heartDropChance: 0.35
 --- !u!1 &1484761265
 GameObject:
   m_ObjectHideFlags: 0
@@ -30339,6 +30341,10 @@ PrefabInstance:
     - target: {fileID: 1429911940697521412, guid: cd73f51edd07da34eb7e9550b5e790b6, type: 3}
       propertyPath: patrolPoints.Array.data[1].y
       value: 5.22057
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120877990964179224, guid: cd73f51edd07da34eb7e9550b5e790b6, type: 3}
+      propertyPath: heartDropChance
+      value: 0.194
       objectReference: {fileID: 0}
     - target: {fileID: 8309141667797366651, guid: cd73f51edd07da34eb7e9550b5e790b6, type: 3}
       propertyPath: m_Name

@@ -287,6 +287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 1
   animator: {fileID: 0}
+  heartDropPrefab: {fileID: 4715824890995259987, guid: 77f55ce06f07ce54da139611ae3a5635, type: 3}
+  heartDropChance: 0.18
 --- !u!114 &5634454923799352121
 MonoBehaviour:
   m_ObjectHideFlags: 0

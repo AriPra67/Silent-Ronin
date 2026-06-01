@@ -6129,6 +6129,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1441638017541426340, guid: 50ef8c917c91fb349b2ff2b984ef092b, type: 3}
+      propertyPath: heartDropChance
+      value: 0.274
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441638017541426340, guid: 50ef8c917c91fb349b2ff2b984ef092b, type: 3}
+      propertyPath: heartDropPrefab
+      value: 
+      objectReference: {fileID: 4715824890995259987, guid: 77f55ce06f07ce54da139611ae3a5635, type: 3}
     - target: {fileID: 2423932691155545697, guid: 50ef8c917c91fb349b2ff2b984ef092b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.4
@@ -13093,6 +13101,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 58385377875457158, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
+      propertyPath: heartDropChance
+      value: 0.223
+      objectReference: {fileID: 0}
+    - target: {fileID: 58385377875457158, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
+      propertyPath: heartDropPrefab
+      value: 
+      objectReference: {fileID: 4715824890995259987, guid: 77f55ce06f07ce54da139611ae3a5635, type: 3}
     - target: {fileID: 1345401904970925230, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
       propertyPath: patrolPoints.Array.data[0].x
       value: 3.47
@@ -13395,6 +13411,14 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[1].y
       value: 26.99
       objectReference: {fileID: 0}
+    - target: {fileID: 2271214316671300460, guid: 7123f4a8ce9ee7e4196fd60dbedfa81a, type: 3}
+      propertyPath: heartDropChance
+      value: 0.234
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271214316671300460, guid: 7123f4a8ce9ee7e4196fd60dbedfa81a, type: 3}
+      propertyPath: heartDropPrefab
+      value: 
+      objectReference: {fileID: 4715824890995259987, guid: 77f55ce06f07ce54da139611ae3a5635, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13726,6 +13750,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 1
   animator: {fileID: 0}
+  heartDropPrefab: {fileID: 0}
+  heartDropChance: 0.35
 --- !u!1 &1484761265
 GameObject:
   m_ObjectHideFlags: 0

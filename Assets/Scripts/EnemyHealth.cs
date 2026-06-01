@@ -7,12 +7,19 @@ public class EnemyHealth : MonoBehaviour
 
     public Animator animator;
 
+    [Header("Drops")]
+    public GameObject heartDropPrefab;
+
+    [Range(0f, 1f)]
+    public float heartDropChance = 0.35f;
+
     private bool isDead;
 
     void Start()
     {
         currentHealth = maxHealth;
-        //Adding this for bug - Xi
+
+        // Adding this for bug - Xi
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
     }
@@ -41,7 +48,6 @@ public class EnemyHealth : MonoBehaviour
 
         Debug.Log("DEATH TRIGGERED");
 
-
         Enemy_Patrol patrol = GetComponent<Enemy_Patrol>();
 
         if (patrol != null)
@@ -55,14 +61,12 @@ public class EnemyHealth : MonoBehaviour
             rb.simulated = false;
         }
 
-        //Adding this - Xi
         Enemy_Attack attack = GetComponentInChildren<Enemy_Attack>();
 
         if (attack != null)
         {
             attack.StopAttacking();
             attack.enabled = false;
-
         }
 
         Collider2D col = GetComponent<Collider2D>();
@@ -79,8 +83,22 @@ public class EnemyHealth : MonoBehaviour
         Invoke(nameof(RemoveEnemy), 2f);
     }
 
+    void TryDropHeart()
+    {
+        if (heartDropPrefab == null)
+            return;
+
+        float roll = Random.value;
+
+        if (roll <= heartDropChance)
+        {
+            Instantiate(heartDropPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
     void RemoveEnemy()
     {
+        TryDropHeart();
         Destroy(gameObject);
     }
 }
