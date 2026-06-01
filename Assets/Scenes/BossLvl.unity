@@ -300,10 +300,10 @@ MonoBehaviour:
   player: {fileID: 1280850342}
   rb: {fileID: 154075408}
   animator: {fileID: 154075409}
-  speed: 6
+  speed: 8
   turnDelay: 0.9
-  attackRangeX: 5
-  attackRangeY: 3
+  attackRangeX: 9
+  attackRangeY: 4
   attackCooldown: 1
   attackWindup: 0.7
   attackRecovery: 0.4

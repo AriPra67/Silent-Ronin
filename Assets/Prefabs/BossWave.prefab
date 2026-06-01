@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossWave
   speed: 6
-  lifetime: 3
+  lifetime: 100
   damage: 1
   useTrail: 1
   trailSpawnRate: 0.06

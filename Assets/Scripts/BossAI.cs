@@ -102,12 +102,17 @@ public class BossAI : MonoBehaviour
     }
 
     bool PlayerIsInAttackRange()
-    {
-        float xDistance = Mathf.Abs(player.position.x - transform.position.x);
-        float yDistance = Mathf.Abs(player.position.y - transform.position.y);
+{
+    float xDifference = player.position.x - transform.position.x;
+    float xDistance = Mathf.Abs(xDifference);
+    float yDistance = Mathf.Abs(player.position.y - transform.position.y);
 
-        return xDistance <= attackRangeX && yDistance <= attackRangeY;
-    }
+    bool playerIsInFront = Mathf.Sign(xDifference) == facingDirection;
+
+    return playerIsInFront &&
+           xDistance <= attackRangeX &&
+           yDistance <= attackRangeY;
+}
 
     IEnumerator AttackRoutine()
     {
