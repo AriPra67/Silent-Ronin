@@ -1723,11 +1723,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7133418204332458726, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.225977
+      value: -2.47
       objectReference: {fileID: 0}
     - target: {fileID: 7133418204332458726, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9743862
+      value: 22.37
       objectReference: {fileID: 0}
     - target: {fileID: 7133418204332458726, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1817,11 +1817,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 45019074156070971, guid: bc4574011987c594e86bdf67f344a60d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.36
+      value: -5.44
       objectReference: {fileID: 0}
     - target: {fileID: 45019074156070971, guid: bc4574011987c594e86bdf67f344a60d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.17
+      value: 17.13
       objectReference: {fileID: 0}
     - target: {fileID: 45019074156070971, guid: bc4574011987c594e86bdf67f344a60d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1861,19 +1861,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5634454923799352121, guid: bc4574011987c594e86bdf67f344a60d, type: 3}
       propertyPath: patrolPoints.Array.data[0].x
-      value: 17.6
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 5634454923799352121, guid: bc4574011987c594e86bdf67f344a60d, type: 3}
       propertyPath: patrolPoints.Array.data[0].y
-      value: 38.11
+      value: 17.15
       objectReference: {fileID: 0}
     - target: {fileID: 5634454923799352121, guid: bc4574011987c594e86bdf67f344a60d, type: 3}
       propertyPath: patrolPoints.Array.data[1].x
-      value: 19.47
+      value: 17.5
       objectReference: {fileID: 0}
     - target: {fileID: 5634454923799352121, guid: bc4574011987c594e86bdf67f344a60d, type: 3}
       propertyPath: patrolPoints.Array.data[1].y
-      value: 38.11
+      value: 17.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

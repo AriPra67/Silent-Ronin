@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 922478762005141195}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.7922, y: 1.0581, z: 0}
+  m_LocalPosition: {x: -10.14, y: 23.97, z: 0}
   m_LocalScale: {x: 3.0377688, y: 2.9833648, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -113,7 +113,7 @@ MonoBehaviour:
   player: {fileID: 0}
   attackRange: 9
   shootCooldown: 2
-  attackAnimationTime: 0.6
+  attackAnimationTime: 1.5
 --- !u!114 &1874959659548994606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHitbox
   damage: 1
+  canDamagePlayer: 1
 --- !u!1 &3619827622416697342
 GameObject:
   m_ObjectHideFlags: 0

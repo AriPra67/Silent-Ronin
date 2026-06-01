@@ -7,16 +7,18 @@ public class EnemyShooting : MonoBehaviour
     public Transform player;
 
     public float attackRange = 3f;
-    public float shootCooldown = 2f;
-    public float attackAnimationTime = 0.6f;
+    public float shootCooldown = 2.5f;
+    public float attackAnimationTime = 2f;
 
     private float timer;
     private Animator animator;
     private bool isAttacking;
+    private bool hasFiredThisAttack;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        timer = shootCooldown;
 
         if (player == null)
         {
@@ -39,16 +41,12 @@ public class EnemyShooting : MonoBehaviour
 
             if (timer >= shootCooldown && !isAttacking)
             {
-                timer = 0f;
                 StartAttack();
             }
         }
         else
         {
-            timer = 0f;
-
-            if (isAttacking)
-                StopAttack();
+            timer = shootCooldown;
         }
     }
 
@@ -66,7 +64,9 @@ public class EnemyShooting : MonoBehaviour
             return;
         }
 
+        timer = 0f;
         isAttacking = true;
+        hasFiredThisAttack = false;
 
         if (animator != null)
             animator.SetBool("attack", true);
@@ -75,19 +75,25 @@ public class EnemyShooting : MonoBehaviour
         Invoke(nameof(StopAttack), attackAnimationTime);
     }
 
-    // Animation Event calls this
+    // Animation Event calls this at the exact release frame
     public void EnemyFireBullet()
     {
-        Debug.Log("EnemyFireBullet event happened");
+        if (!isAttacking) return;
+        if (hasFiredThisAttack) return;
 
         if (bullet == null || bulletpos == null) return;
 
+        hasFiredThisAttack = true;
+
         Instantiate(bullet, bulletpos.position, Quaternion.identity);
+
+        Debug.Log("Enemy fired bullet from animation event");
     }
 
     void StopAttack()
     {
         isAttacking = false;
+        hasFiredThisAttack = false;
 
         if (animator != null)
             animator.SetBool("attack", false);
