@@ -8,8 +8,6 @@ public class EnemyShooting : MonoBehaviour
 
     public float attackRange = 3f;
     public float shootCooldown = 2f;
-
-    public float bulletDelay = 0.3f;
     public float attackAnimationTime = 0.6f;
 
     private float timer;
@@ -48,7 +46,9 @@ public class EnemyShooting : MonoBehaviour
         else
         {
             timer = 0f;
-            StopAttack();
+
+            if (isAttacking)
+                StopAttack();
         }
     }
 
@@ -56,13 +56,13 @@ public class EnemyShooting : MonoBehaviour
     {
         if (bullet == null)
         {
-            Debug.LogError("EnemyShooting: Bullet prefab is missing.");
+            Debug.LogError("Bullet missing");
             return;
         }
 
         if (bulletpos == null)
         {
-            Debug.LogError("EnemyShooting: BulletPos is missing.");
+            Debug.LogError("BulletPos missing");
             return;
         }
 
@@ -71,14 +71,18 @@ public class EnemyShooting : MonoBehaviour
         if (animator != null)
             animator.SetBool("attack", true);
 
-        Invoke(nameof(FireBullet), bulletDelay);
+        CancelInvoke(nameof(StopAttack));
         Invoke(nameof(StopAttack), attackAnimationTime);
     }
 
-    void FireBullet()
+    // Animation Event calls this
+    public void EnemyFireBullet()
     {
-        if (bullet != null && bulletpos != null)
-            Instantiate(bullet, bulletpos.position, Quaternion.identity);
+        Debug.Log("EnemyFireBullet event happened");
+
+        if (bullet == null || bulletpos == null) return;
+
+        Instantiate(bullet, bulletpos.position, Quaternion.identity);
     }
 
     void StopAttack()
