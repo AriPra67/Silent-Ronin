@@ -14739,6 +14739,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7133418204332458726, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
   m_PrefabInstance: {fileID: 8407419225817786663}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &4394533051427199025 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7458810222287752677, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
+  m_PrefabInstance: {fileID: 8407419225817786663}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8407419225817786663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14789,6 +14794,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133418204332458726, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424104397241805488, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ba042ff76fd32744bb441ccf39c7286, type: 3}
+    - target: {fileID: 7424104397241805488, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
+      propertyPath: jumpSource
+      value: 
+      objectReference: {fileID: 4394533051427199025}
+    - target: {fileID: 7458810222287752677, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8550301694648891907, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
