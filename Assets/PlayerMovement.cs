@@ -48,15 +48,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void HandleMovement()
+{
+    if (isAttacking)
     {
-        if (isAttacking)
-        {
-            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
-            return;
-        }
-
-        rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        return;
     }
+
+    rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+}
 
     void HandleFlip()
     {
@@ -175,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
         }
     }
+
 
     private void OnDrawGizmosSelected()
     {
