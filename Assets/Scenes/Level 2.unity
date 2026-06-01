@@ -6193,6 +6193,10 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[1].y
       value: -1.14
       objectReference: {fileID: 0}
+    - target: {fileID: 5015548653494771350, guid: 50ef8c917c91fb349b2ff2b984ef092b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5906560179087730546, guid: 50ef8c917c91fb349b2ff2b984ef092b, type: 3}
       propertyPath: m_Name
       value: Karasu tengu
@@ -13250,7 +13254,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -13593,12 +13597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8dfe131afe8d644864c66e078a1ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  target: {fileID: 0}
-  offset: {x: 0, y: 0, z: -10}
-  minX: -9999
-  maxX: 9999
-  minY: -9999
-  maxY: 9999
 --- !u!1 &1420778049
 GameObject:
   m_ObjectHideFlags: 0
@@ -13618,7 +13616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1420778050
 MonoBehaviour:
   m_ObjectHideFlags: 0
