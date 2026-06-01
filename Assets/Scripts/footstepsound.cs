@@ -26,11 +26,5 @@ public class FootstepSound : MonoBehaviour
         {
             footstepSource.Stop();
         }
-
-        // Jump
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            jumpSource.PlayOneShot(jumpSound);
-        }
     }
 }

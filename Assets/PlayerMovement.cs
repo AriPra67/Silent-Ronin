@@ -7,6 +7,10 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     public PlayerHitbox playerHitbox;
 
+    public AudioSource jumpSource;
+    public AudioClip jumpSound;
+
+
     [Header("Movement")]
     public float moveSpeed = 5f;
     private float horizontalMovement;
@@ -92,13 +96,20 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Jump(InputAction.CallbackContext context)
+{
+    if (context.performed && IsGrounded())
     {
-        if (context.performed && IsGrounded())
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
 
-        if (context.canceled && rb.linearVelocity.y > 0)
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+        if (jumpSource != null && jumpSound != null)
+        {
+            jumpSource.PlayOneShot(jumpSound);
+        }
     }
+
+    if (context.canceled && rb.linearVelocity.y > 0)
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+}
 
     public void Attack(InputAction.CallbackContext context)
     {
