@@ -16,7 +16,12 @@ public class EnemyBulletScript : MonoBehaviour
         if (player != null && rb != null)
         {
             Vector2 direction = (player.transform.position - transform.position).normalized;
+
             rb.linearVelocity = direction * force;
+
+            // Rotate arrow to face movement direction
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
         }
 
         Destroy(gameObject, 3f);
