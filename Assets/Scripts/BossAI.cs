@@ -7,7 +7,6 @@ public class BossAI : MonoBehaviour
     public Transform player;
     public Rigidbody2D rb;
     public Animator animator;
-    public GameObject hitboxVisual;
 
     [Header("Movement")]
     public float speed = 2.2f;
@@ -24,21 +23,18 @@ public class BossAI : MonoBehaviour
     [Header("Attack Timing")]
     public float attackCooldown = 2.5f;
     public float attackWindup = 1.2f;
-    public float attackActiveTime = 0.35f;
     public float attackRecovery = 1.2f;
 
-    [Header("Attack Movement")]
-    public float attackLungeForce = 4f;
-
-    [Header("Damage")]
-    public int attackDamage = 1;
+    [Header("Wave Attack")]
+    public GameObject wavePrefab;
+    public Transform waveSpawnPoint;
+    public float attackLungeForce = 0f;
 
     [Header("Debug")]
     public bool showAttackDebugBox = true;
 
     private float cooldownTimer;
     private bool isAttacking;
-    private bool hasDamagedThisAttack;
 
     void Awake()
     {
@@ -55,9 +51,6 @@ public class BossAI : MonoBehaviour
             if (foundPlayer != null)
                 player = foundPlayer.transform;
         }
-
-        if (hitboxVisual != null)
-            hitboxVisual.SetActive(false);
 
         facingDirection = transform.localScale.x >= 0 ? 1 : -1;
     }
@@ -119,7 +112,6 @@ public class BossAI : MonoBehaviour
     IEnumerator AttackRoutine()
     {
         isAttacking = true;
-        hasDamagedThisAttack = false;
         cooldownTimer = attackCooldown;
 
         rb.linearVelocity = Vector2.zero;
@@ -131,48 +123,54 @@ public class BossAI : MonoBehaviour
             animator.SetTrigger("attack");
         }
 
-        // WINDUP: animation plays first, but boss cannot damage yet
+        // Windup: animation warning before the wave appears
         yield return new WaitForSeconds(attackWindup);
 
-        if (hitboxVisual != null)
-            hitboxVisual.SetActive(true);
+        SpawnWave();
 
-        float activeTimer = 0f;
-
-        // ACTIVE: boss lunges and can damage the player once
-        while (activeTimer < attackActiveTime)
+        // Optional tiny movement during attack. Keep this 0 if you only want the wave.
+        if (attackLungeForce > 0f)
         {
             rb.linearVelocity = new Vector2(facingDirection * attackLungeForce, rb.linearVelocity.y);
-
-            if (!hasDamagedThisAttack && PlayerIsInAttackRange())
-            {
-                DamagePlayer();
-                hasDamagedThisAttack = true;
-            }
-
-            activeTimer += Time.deltaTime;
-            yield return null;
+            yield return new WaitForSeconds(0.15f);
+            rb.linearVelocity = Vector2.zero;
         }
 
-        rb.linearVelocity = Vector2.zero;
-
-        if (hitboxVisual != null)
-            hitboxVisual.SetActive(false);
-
-        // RECOVERY: lets the attack animation finish before chasing again
+        // Recovery before boss chases again
         yield return new WaitForSeconds(attackRecovery);
 
         isAttacking = false;
     }
 
-    void DamagePlayer()
+    void SpawnWave()
     {
-        PlayerHealth playerHealth = player.GetComponentInParent<PlayerHealth>();
-
-        if (playerHealth != null)
+        if (wavePrefab == null)
         {
-            playerHealth.TakeDamage(attackDamage);
-            Debug.Log("Boss damaged player");
+            Debug.LogWarning("Boss wave prefab is missing");
+            return;
+        }
+
+        if (waveSpawnPoint == null)
+        {
+            Debug.LogWarning("Boss wave spawn point is missing");
+            return;
+        }
+
+        GameObject wave = Instantiate(
+            wavePrefab,
+            waveSpawnPoint.position,
+            Quaternion.identity
+        );
+
+        BossWave bossWave = wave.GetComponent<BossWave>();
+
+        if (bossWave != null)
+        {
+            bossWave.SetDirection(facingDirection);
+        }
+        else
+        {
+            Debug.LogWarning("Spawned wave has no BossWave script attached");
         }
     }
 

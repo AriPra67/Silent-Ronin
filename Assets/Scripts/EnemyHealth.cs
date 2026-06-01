@@ -7,6 +7,12 @@ public class EnemyHealth : MonoBehaviour
 
     public Animator animator;
 
+[Header("Death Position Fix")]
+public float deathYOffset = 0f;
+
+    [Header("Boss UI")]
+    public BossHealthUI bossHealthUI;
+
     [Header("Drops")]
     public GameObject heartDropPrefab;
 
@@ -19,9 +25,14 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
 
-        // Adding this for bug - Xi
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
+
+        if (bossHealthUI != null)
+        {
+            bossHealthUI.SetMaxHearts(maxHealth);
+            bossHealthUI.UpdateHearts(currentHealth);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -30,8 +41,14 @@ public class EnemyHealth : MonoBehaviour
             return;
 
         currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         Debug.Log("Enemy HP: " + currentHealth);
+
+        if (bossHealthUI != null)
+        {
+            bossHealthUI.UpdateHearts(currentHealth);
+        }
 
         if (currentHealth <= 0)
         {
@@ -45,6 +62,10 @@ public class EnemyHealth : MonoBehaviour
             return;
 
         isDead = true;
+if (deathYOffset != 0f)
+{
+    transform.position += new Vector3(0f, deathYOffset, 0f);
+}
 
         Debug.Log("DEATH TRIGGERED");
 
@@ -52,6 +73,11 @@ public class EnemyHealth : MonoBehaviour
 
         if (patrol != null)
             patrol.enabled = false;
+
+        BossAI bossAI = GetComponent<BossAI>();
+
+        if (bossAI != null)
+            bossAI.enabled = false;
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
@@ -77,7 +103,7 @@ public class EnemyHealth : MonoBehaviour
         if (animator != null)
         {
             animator.enabled = true;
-            animator.Play("Death", 0, 0f);
+            animator.SetTrigger("Die");
         }
 
         Invoke(nameof(RemoveEnemy), 2f);
