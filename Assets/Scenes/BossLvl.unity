@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: f878e673cdaa934438e4a47e490d5013, type: 2}
     - target: {fileID: 4221240292305704257, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8.22875
+      value: 8.261664
       objectReference: {fileID: 0}
     - target: {fileID: 4221240292305704257, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
       propertyPath: m_LocalScale.y
@@ -196,7 +196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4221240292305704257, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.07
+      value: 0.0828
       objectReference: {fileID: 0}
     - target: {fileID: 4221240292305704257, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -258,6 +258,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.029
       objectReference: {fileID: 0}
+    - target: {fileID: 8840662034637942611, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.79402137
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840662034637942611, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0015474707
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1345401904970925230, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
     m_RemovedGameObjects: []
@@ -300,13 +308,18 @@ MonoBehaviour:
   player: {fileID: 1280850342}
   rb: {fileID: 154075408}
   animator: {fileID: 154075409}
-  speed: 10
+  speed: 14
   turnDelay: 2.5
-  attackRangeX: 14
+  wallCheck: {fileID: 354561445}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  wallCheckDistance: 1
+  attackRangeX: 30
   attackRangeY: 4
-  attackCooldown: 1
+  attackCooldown: 0.75
   attackWindup: 0.7
-  attackRecovery: 0.4
+  attackRecovery: 0.6
   wavePrefab: {fileID: 5102091772519618509, guid: 519f2db6a44b91645ac697b9692fb7d5, type: 3}
   waveSpawnPoint: {fileID: 2001554070}
   attackLungeForce: 0
@@ -2761,6 +2774,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &354561445 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5322256700886359044, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
+  m_PrefabInstance: {fileID: 154075403}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &534640324
 GameObject:
   m_ObjectHideFlags: 0

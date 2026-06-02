@@ -16,6 +16,11 @@ public class BossAI : MonoBehaviour
     private float turnTimer;
     private int facingDirection = 1;
 
+    [Header("Wall Check")]
+    public Transform wallCheck;
+    public LayerMask wallLayer;
+    public float wallCheckDistance = 0.6f;
+
     [Header("Attack Range")]
     public float attackRangeX = 5f;
     public float attackRangeY = 3f;
@@ -98,21 +103,45 @@ public class BossAI : MonoBehaviour
             turnTimer = 0f;
         }
 
+        if (IsTouchingWall())
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            animator.SetFloat("magnitude", 0f);
+            return;
+        }
+
         rb.linearVelocity = new Vector2(facingDirection * speed, rb.linearVelocity.y);
     }
 
+    bool IsTouchingWall()
+    {
+        if (wallCheck == null)
+            return false;
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            wallCheck.position,
+            Vector2.right * facingDirection,
+            wallCheckDistance,
+            wallLayer
+        );
+
+        return hit.collider != null;
+    }
+
     bool PlayerIsInAttackRange()
-{
-    float xDifference = player.position.x - transform.position.x;
-    float xDistance = Mathf.Abs(xDifference);
-    float yDistance = Mathf.Abs(player.position.y - transform.position.y);
+    {
+        float xDifference = player.position.x - transform.position.x;
+        float xDistance = Mathf.Abs(xDifference);
+        float yDistance = Mathf.Abs(player.position.y - transform.position.y);
 
-    bool playerIsInFront = Mathf.Sign(xDifference) == facingDirection;
+        bool playerIsInFront =
+            (facingDirection == 1 && xDifference > 0f) ||
+            (facingDirection == -1 && xDifference < 0f);
 
-    return playerIsInFront &&
-           xDistance <= attackRangeX &&
-           yDistance <= attackRangeY;
-}
+        return playerIsInFront &&
+               xDistance <= attackRangeX &&
+               yDistance <= attackRangeY;
+    }
 
     IEnumerator AttackRoutine()
     {
@@ -128,20 +157,17 @@ public class BossAI : MonoBehaviour
             animator.SetTrigger("attack");
         }
 
-        // Windup: animation warning before the wave appears
         yield return new WaitForSeconds(attackWindup);
 
         SpawnWave();
 
-        // Optional tiny movement during attack. Keep this 0 if you only want the wave.
-        if (attackLungeForce > 0f)
+        if (attackLungeForce > 0f && !IsTouchingWall())
         {
             rb.linearVelocity = new Vector2(facingDirection * attackLungeForce, rb.linearVelocity.y);
             yield return new WaitForSeconds(0.15f);
             rb.linearVelocity = Vector2.zero;
         }
 
-        // Recovery before boss chases again
         yield return new WaitForSeconds(attackRecovery);
 
         isAttacking = false;
@@ -203,6 +229,18 @@ public class BossAI : MonoBehaviour
             Gizmos.DrawWireCube(
                 transform.position,
                 new Vector3(attackRangeX * 2f, attackRangeY * 2f, 0f)
+            );
+        }
+
+        if (wallCheck != null)
+        {
+            Gizmos.color = Color.red;
+
+            Vector3 dir = transform.localScale.x >= 0 ? Vector3.right : Vector3.left;
+
+            Gizmos.DrawLine(
+                wallCheck.position,
+                wallCheck.position + dir * wallCheckDistance
             );
         }
     }
