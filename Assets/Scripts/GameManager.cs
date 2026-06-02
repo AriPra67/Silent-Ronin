@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,7 +7,9 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public Vector3 lastCheckpointPosition;
+
     private bool hasReachedCheckpoint = false;
+    private string checkpointSceneName = "";
 
     void Awake()
     {
@@ -26,16 +29,30 @@ public class GameManager : MonoBehaviour
     {
         lastCheckpointPosition = newPosition;
         hasReachedCheckpoint = true;
+
+        // Save which scene this checkpoint belongs to
+        checkpointSceneName = SceneManager.GetActiveScene().name;
+
+        Debug.Log("Checkpoint saved in scene: " + checkpointSceneName);
     }
 
     public Vector3 GetRespawnPosition(Vector3 defaultStartPosition)
     {
-        // If the player hasn't hit a checkpoint yet, use the level's default start
-        return hasReachedCheckpoint ? lastCheckpointPosition : defaultStartPosition;
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        // Only use the checkpoint if it belongs to the current scene
+        if (hasReachedCheckpoint && checkpointSceneName == currentSceneName)
+        {
+            return lastCheckpointPosition;
+        }
+
+        // Otherwise use the player's starting position in this scene
+        return defaultStartPosition;
     }
 
     public void ResetCheckpointForNewLevel()
     {
         hasReachedCheckpoint = false;
+        checkpointSceneName = "";
     }
 }
