@@ -15,6 +15,7 @@ Silent Ronin is a 2D action platformer game developed in Unity. Players take con
 * Health and damage system
 * Checkpoint and respawn system
 * Multiple playable levels
+* Boss levels
 
 ### Additional Features
 
@@ -23,6 +24,8 @@ Silent Ronin is a 2D action platformer game developed in Unity. Players take con
 * Character and enemy animations
 * Sound effects for gameplay actions
 * UI health display system
+* Enemy drops
+* Dynamic Platforms
 
 ## Team Members
 
