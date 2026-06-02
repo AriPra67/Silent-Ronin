@@ -318,8 +318,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 1
   animator: {fileID: 0}
-  heartDropPrefab: {fileID: 4715824890995259987, guid: 77f55ce06f07ce54da139611ae3a5635, type: 3}
-  heartDropChance: 0.18
 --- !u!114 &1429911940697521412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,7 +366,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

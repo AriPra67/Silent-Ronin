@@ -1,102 +1,25 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
-using System.Collections;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [Header("Attack")]
     public GameObject hitbox;
-    public float attackDuration = 0.2f;
-    public float attackCooldown = 0.45f;
 
-    [Header("Dash")]
-    public float dashForce = 12f;
-    public float dashDuration = 0.12f;
-
-    [Header("Audio")]
-    public AudioSource attackAudio;
-
-    private Rigidbody2D rb;
-    private Animator animator;
-    private PlayerHitbox playerHitbox;
-
-    private bool canAttack = true;
-    private float originalGravityScale;
-
-    void Awake()
+    void Update()
     {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-
-        if (rb != null)
-            originalGravityScale = rb.gravityScale;
-
-        if (hitbox != null)
+        if (Input.GetMouseButtonDown(0)) // left click
         {
-            playerHitbox = hitbox.GetComponent<PlayerHitbox>();
-            hitbox.SetActive(false);
+            Attack();
         }
     }
 
-    public void Attack(InputAction.CallbackContext context)
+    void Attack()
     {
-        if (!context.performed || !canAttack)
-            return;
-
-        // Ignore clicks on UI buttons
-        if (EventSystem.current != null &&
-            EventSystem.current.IsPointerOverGameObject())
-            return;
-
-        StartCoroutine(DashAttack());
+        hitbox.SetActive(true);
+        Invoke("StopAttack", 0.3f);
     }
 
-    IEnumerator DashAttack()
+    void StopAttack()
     {
-        canAttack = false;
-
-        if (animator != null)
-            animator.SetTrigger("Attack");
-
-        if (attackAudio != null)
-            attackAudio.Play();
-
-        if (hitbox != null)
-            hitbox.SetActive(true);
-
-        if (playerHitbox != null)
-            playerHitbox.StartAttack();
-
-        float direction = transform.localScale.x > 0 ? 1f : -1f;
-
-        originalGravityScale = rb.gravityScale;
-        rb.gravityScale = 0f;
-        rb.linearVelocity = Vector2.zero;
-
-        float dashTimer = 0f;
-
-        while (dashTimer < dashDuration)
-        {
-            rb.linearVelocity = new Vector2(direction * dashForce, 0f);
-
-            dashTimer += Time.deltaTime;
-            yield return null;
-        }
-
-        rb.linearVelocity = Vector2.zero;
-        rb.gravityScale = originalGravityScale;
-
-        yield return new WaitForSeconds(attackDuration);
-
-        if (playerHitbox != null)
-            playerHitbox.EndAttack();
-
-        if (hitbox != null)
-            hitbox.SetActive(false);
-
-        yield return new WaitForSeconds(attackCooldown);
-
-        canAttack = true;
+        hitbox.SetActive(false);
     }
 }

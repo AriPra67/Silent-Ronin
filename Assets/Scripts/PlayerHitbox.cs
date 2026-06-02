@@ -1,49 +1,42 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHitbox : MonoBehaviour
 {
     public int damage = 1;
-    public bool attackMode = false;
-
-    private HashSet<EnemyHealth> enemiesHitThisAttack = new HashSet<EnemyHealth>();
+    public bool attackMode = true;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        TryHit(other);
-    }
+        Debug.Log("HITBOX TOUCHED: " + other.name);
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        TryHit(other);
-    }
+        if (!attackMode) return;
 
-    private void TryHit(Collider2D other)
-    {
-        if (!attackMode)
+        EnemyHealth enemy = other.transform.GetComponentInParent<EnemyHealth>();
+        if (enemy != null)
+        {
+            Debug.Log("ENEMY HIT!");
+            enemy.TakeDamage(damage);
             return;
+        }
 
-        EnemyHealth enemy = other.GetComponentInParent<EnemyHealth>();
-
-        if (enemy == null)
+        PuzzleGiveHealth puzzle = other.transform.GetComponentInParent<PuzzleGiveHealth>();
+        if (puzzle != null)
+        {
+            Debug.Log("PUZZLE OBJECT HIT!");
+            puzzle.TakeDamage(damage);
             return;
-
-        if (enemiesHitThisAttack.Contains(enemy))
-            return;
-
-        enemiesHitThisAttack.Add(enemy);
-        enemy.TakeDamage(damage);
+        }
     }
 
     public void StartAttack()
     {
         attackMode = true;
-        enemiesHitThisAttack.Clear();
+        Debug.Log("ATTACK ON");
     }
 
     public void EndAttack()
     {
         attackMode = false;
-        enemiesHitThisAttack.Clear();
+        Debug.Log("ATTACK OFF");
     }
 }

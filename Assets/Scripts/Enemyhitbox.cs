@@ -4,9 +4,6 @@ public class EnemyHitbox : MonoBehaviour
 {
     public int damage = 1;
 
-    [Header("Only melee enemies should use this")]
-    public bool canDamagePlayer = true;
-
     private EnemyAI2 ai;
     private bool playerInside;
 
@@ -22,12 +19,10 @@ public class EnemyHitbox : MonoBehaviour
         if (player != null)
         {
             playerInside = true;
+
             ai?.SetPlayerInHitbox(true);
 
-            if (canDamagePlayer)
-            {
-                player.TakeDamage(damage);
-            }
+            player.TakeDamage(damage);
         }
     }
 
@@ -37,8 +32,11 @@ public class EnemyHitbox : MonoBehaviour
 
         if (player != null)
         {
-            playerInside = true;
-            ai?.SetPlayerInHitbox(true);
+            if (!playerInside)
+            {
+                playerInside = true;
+                ai?.SetPlayerInHitbox(true);
+            }
         }
     }
 
@@ -49,6 +47,7 @@ public class EnemyHitbox : MonoBehaviour
         if (player != null)
         {
             playerInside = false;
+
             ai?.SetPlayerInHitbox(false);
         }
     }

@@ -7,32 +7,14 @@ public class EnemyHealth : MonoBehaviour
 
     public Animator animator;
 
-[Header("Death Position Fix")]
-public float deathYOffset = 0f;
-
-    [Header("Boss UI")]
-    public BossHealthUI bossHealthUI;
-
-    [Header("Drops")]
-    public GameObject heartDropPrefab;
-
-    [Range(0f, 1f)]
-    public float heartDropChance = 0.35f;
-
     private bool isDead;
 
     void Start()
     {
         currentHealth = maxHealth;
-
+        //Adding this for bug - Xi
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
-
-        if (bossHealthUI != null)
-        {
-            bossHealthUI.SetMaxHearts(maxHealth);
-            bossHealthUI.UpdateHearts(currentHealth);
-        }
     }
 
     public void TakeDamage(int damage)
@@ -41,14 +23,8 @@ public float deathYOffset = 0f;
             return;
 
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         Debug.Log("Enemy HP: " + currentHealth);
-
-        if (bossHealthUI != null)
-        {
-            bossHealthUI.UpdateHearts(currentHealth);
-        }
 
         if (currentHealth <= 0)
         {
@@ -62,22 +38,14 @@ public float deathYOffset = 0f;
             return;
 
         isDead = true;
-if (deathYOffset != 0f)
-{
-    transform.position += new Vector3(0f, deathYOffset, 0f);
-}
 
         Debug.Log("DEATH TRIGGERED");
+
 
         Enemy_Patrol patrol = GetComponent<Enemy_Patrol>();
 
         if (patrol != null)
             patrol.enabled = false;
-
-        BossAI bossAI = GetComponent<BossAI>();
-
-        if (bossAI != null)
-            bossAI.enabled = false;
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
@@ -87,12 +55,14 @@ if (deathYOffset != 0f)
             rb.simulated = false;
         }
 
+        //Adding this - Xi
         Enemy_Attack attack = GetComponentInChildren<Enemy_Attack>();
 
         if (attack != null)
         {
             attack.StopAttacking();
             attack.enabled = false;
+
         }
 
         Collider2D col = GetComponent<Collider2D>();
@@ -103,28 +73,14 @@ if (deathYOffset != 0f)
         if (animator != null)
         {
             animator.enabled = true;
-            animator.SetTrigger("Die");
+            animator.Play("Death", 0, 0f);
         }
 
         Invoke(nameof(RemoveEnemy), 2f);
     }
 
-    void TryDropHeart()
-    {
-        if (heartDropPrefab == null)
-            return;
-
-        float roll = Random.value;
-
-        if (roll <= heartDropChance)
-        {
-            Instantiate(heartDropPrefab, transform.position, Quaternion.identity);
-        }
-    }
-
     void RemoveEnemy()
     {
-        TryDropHeart();
         Destroy(gameObject);
     }
 }

@@ -1,15 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Animator animator;
     public PlayerHitbox playerHitbox;
-
-    public AudioSource jumpSource;
-    public AudioClip jumpSound;
 
     [Header("Movement")]
     public float moveSpeed = 5f;
@@ -97,14 +93,7 @@ public class PlayerMovement : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed && IsGrounded())
-        {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-
-            if (jumpSource != null && jumpSound != null)
-            {
-                jumpSource.PlayOneShot(jumpSound);
-            }
-        }
 
         if (context.canceled && rb.linearVelocity.y > 0)
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
@@ -112,44 +101,32 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (!context.performed || isAttacking)
-            return;
-
-        if (EventSystem.current != null &&
-            EventSystem.current.IsPointerOverGameObject())
-            return;
-
-        animator.SetTrigger("Attack");
-        isAttacking = true;
-        StartAttackHitbox();
+        if (context.performed && !isAttacking)
+        {
+            animator.SetTrigger("Attack");
+            isAttacking = true;
+            StartAttackHitbox();
+        }
     }
 
     public void Attack2(InputAction.CallbackContext context)
     {
-        if (!context.performed || isAttacking)
-            return;
-
-        if (EventSystem.current != null &&
-            EventSystem.current.IsPointerOverGameObject())
-            return;
-
-        animator.SetTrigger("Attack 2");
-        isAttacking = true;
-        StartAttackHitbox();
+        if (context.performed && !isAttacking)
+        {
+            animator.SetTrigger("Attack 2");
+            isAttacking = true;
+            StartAttackHitbox();
+        }
     }
 
     public void Attack3(InputAction.CallbackContext context)
     {
-        if (!context.performed || isAttacking)
-            return;
-
-        if (EventSystem.current != null &&
-            EventSystem.current.IsPointerOverGameObject())
-            return;
-
-        animator.SetTrigger("Attack 3");
-        isAttacking = true;
-        StartAttackHitbox();
+        if (context.performed && !isAttacking)
+        {
+            animator.SetTrigger("Attack 3");
+            isAttacking = true;
+            StartAttackHitbox();
+        }
     }
 
     void StartAttackHitbox()
