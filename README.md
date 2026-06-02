@@ -55,6 +55,10 @@ The project requires:
 
 ### Running the Project
 
+1. Go into 'Build' file and run the .exe
+
+or
+
 1. Clone the repository from GitHub.
 2. Open Unity Hub.
 3. Add the project folder.
