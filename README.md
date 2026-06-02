@@ -55,7 +55,7 @@ The project requires:
 
 ### Running the Project
 
-1. Go into 'Build' file and run the .exe
+1. Go into 'ReleaseFiles' folder and run the .exe
 
 or
 
