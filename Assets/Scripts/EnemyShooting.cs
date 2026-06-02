@@ -10,15 +10,23 @@ public class EnemyShooting : MonoBehaviour
     public float shootCooldown = 2.5f;
     public float attackAnimationTime = 2f;
 
+    [Header("Facing")]
+    public bool startsFacingRight = true;
+
     private float timer;
     private Animator animator;
     private bool isAttacking;
     private bool hasFiredThisAttack;
+    private bool shootingStopped;
+
+    private int facingDirection = 1;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         timer = shootCooldown;
+
+        facingDirection = startsFacingRight ? 1 : -1;
 
         if (player == null)
         {
@@ -31,7 +39,13 @@ public class EnemyShooting : MonoBehaviour
 
     void Update()
     {
-        if (player == null) return;
+        if (shootingStopped)
+            return;
+
+        if (player == null)
+            return;
+
+        FacePlayer();
 
         float distance = Vector2.Distance(transform.position, player.position);
 
@@ -50,19 +64,49 @@ public class EnemyShooting : MonoBehaviour
         }
     }
 
+    void FacePlayer()
+    {
+        if (shootingStopped || player == null)
+            return;
+
+        float xDifference = player.position.x - transform.position.x;
+
+        if (xDifference > 0f)
+        {
+            SetFacingDirection(1);
+        }
+        else if (xDifference < 0f)
+        {
+            SetFacingDirection(-1);
+        }
+    }
+
+    void SetFacingDirection(int direction)
+    {
+        if (direction == facingDirection)
+            return;
+
+        facingDirection = direction;
+
+        Vector3 scale = transform.localScale;
+
+        if (startsFacingRight)
+            scale.x = Mathf.Abs(scale.x) * facingDirection;
+        else
+            scale.x = Mathf.Abs(scale.x) * -facingDirection;
+
+        transform.localScale = scale;
+    }
+
     void StartAttack()
     {
-        if (bullet == null)
-        {
-            Debug.LogError("Bullet missing");
+        if (shootingStopped)
             return;
-        }
 
-        if (bulletpos == null)
-        {
-            Debug.LogError("BulletPos missing");
+        if (bullet == null || bulletpos == null)
             return;
-        }
+
+        FacePlayer();
 
         timer = 0f;
         isAttacking = true;
@@ -75,27 +119,54 @@ public class EnemyShooting : MonoBehaviour
         Invoke(nameof(StopAttack), attackAnimationTime);
     }
 
-    // Animation Event calls this at the exact release frame
     public void EnemyFireBullet()
     {
-        if (!isAttacking) return;
-        if (hasFiredThisAttack) return;
+        if (shootingStopped)
+            return;
 
-        if (bullet == null || bulletpos == null) return;
+        if (!isAttacking)
+            return;
+
+        if (hasFiredThisAttack)
+            return;
+
+        if (bullet == null || bulletpos == null)
+            return;
 
         hasFiredThisAttack = true;
 
         Instantiate(bullet, bulletpos.position, Quaternion.identity);
-
-        Debug.Log("Enemy fired bullet from animation event");
     }
 
     void StopAttack()
     {
+        if (shootingStopped)
+            return;
+
         isAttacking = false;
         hasFiredThisAttack = false;
 
         if (animator != null)
             animator.SetBool("attack", false);
+    }
+
+    public void StopShooting()
+    {
+        shootingStopped = true;
+        isAttacking = false;
+        hasFiredThisAttack = true;
+
+        CancelInvoke(nameof(StopAttack));
+
+        if (animator != null)
+        {
+            animator.SetBool("attack", false);
+        }
+    }
+
+    void OnDisable()
+    {
+        CancelInvoke(nameof(StopAttack));
+        shootingStopped = true;
     }
 }

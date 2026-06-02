@@ -3,17 +3,21 @@ using UnityEngine;
 public class FootstepSound : MonoBehaviour
 {
     public AudioSource footstepSource;
-    public AudioSource jumpSource;
 
     public AudioClip runningGrass;
-    public AudioClip jumpSound;
+
+    [Header("Ground Check")]
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    public Vector2 groundCheckSize = new Vector2(0.5f, 0.2f);
 
     void Update()
     {
         bool moving = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
+        bool grounded = IsGrounded();
 
-        // Footsteps
-        if (moving)
+        // Footsteps only play while moving AND grounded
+        if (moving && grounded)
         {
             if (!footstepSource.isPlaying)
             {
@@ -24,7 +28,32 @@ public class FootstepSound : MonoBehaviour
         }
         else
         {
-            footstepSource.Stop();
+            if (footstepSource.isPlaying)
+            {
+                footstepSource.Stop();
+            }
+        }
+    }
+
+    bool IsGrounded()
+    {
+        if (groundCheck == null)
+            return false;
+
+        return Physics2D.OverlapBox(
+            groundCheck.position,
+            groundCheckSize,
+            0f,
+            groundLayer
+        );
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(groundCheck.position, groundCheckSize);
         }
     }
 }

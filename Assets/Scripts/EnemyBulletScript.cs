@@ -7,6 +7,9 @@ public class EnemyBulletScript : MonoBehaviour
     public float force = 5f;
     public int damage = 1;
 
+    [Header("Destroy On Hit")]
+    public LayerMask destroyOnLayers;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,7 +22,6 @@ public class EnemyBulletScript : MonoBehaviour
 
             rb.linearVelocity = direction * force;
 
-            // Rotate arrow to face movement direction
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
@@ -29,9 +31,7 @@ public class EnemyBulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Bullet hit: " + other.name);
-
-        PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+        PlayerHealth playerHealth = other.GetComponentInParent<PlayerHealth>();
 
         if (playerHealth != null)
         {
@@ -40,7 +40,7 @@ public class EnemyBulletScript : MonoBehaviour
             return;
         }
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Building"))
+        if (((1 << other.gameObject.layer) & destroyOnLayers) != 0)
         {
             Destroy(gameObject);
         }

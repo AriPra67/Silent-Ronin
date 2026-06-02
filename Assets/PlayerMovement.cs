@@ -93,7 +93,10 @@ public class PlayerMovement : MonoBehaviour
         if (rb.linearVelocity.y < 0)
         {
             rb.gravityScale = baseGravity * fallGravityMult;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -maxFallSpeed));
+            rb.linearVelocity = new Vector2(
+                rb.linearVelocity.x,
+                Mathf.Max(rb.linearVelocity.y, -maxFallSpeed)
+            );
         }
         else
         {
@@ -103,7 +106,20 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleAnimations()
     {
-        animator.SetFloat("magnitude", Mathf.Abs(horizontalMovement));
+        bool grounded = IsGrounded();
+
+        animator.SetBool("isJumping", !grounded);
+
+        // Only let magnitude control run/idle while grounded.
+        // This stops the run animation playing while moving in the air.
+        if (grounded)
+        {
+            animator.SetFloat("magnitude", Mathf.Abs(horizontalMovement));
+        }
+        else
+        {
+            animator.SetFloat("magnitude", 0f);
+        }
     }
 
     public void Move(InputAction.CallbackContext context)

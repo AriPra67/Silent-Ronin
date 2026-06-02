@@ -318,6 +318,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 1
   animator: {fileID: 0}
+  bossHealthUI: {fileID: 0}
+  damageCooldown: 0
+  deathYOffset: 0
+  heartDropPrefab: {fileID: 0}
+  heartDropChance: 0.35
 --- !u!114 &3295736533303408630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +371,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

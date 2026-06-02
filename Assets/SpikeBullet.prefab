@@ -135,6 +135,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   force: 5
   damage: 1
+  destroyOnLayers:
+    serializedVersion: 2
+    m_Bits: 264
 --- !u!70 &8464021005962838066
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

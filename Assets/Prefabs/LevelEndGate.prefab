@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6471758854511503955}
   - component: {fileID: 7987071341489365218}
   - component: {fileID: 204314491295669193}
-  - component: {fileID: 6096513885014141778}
+  - component: {fileID: 4543136617027325312}
   m_Layer: 0
   m_Name: LevelEndGate
   m_TagString: Untagged
@@ -140,7 +140,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6096513885014141778
+--- !u!114 &4543136617027325312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,10 +149,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 110487626698540958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9cc5c8e6fdee6741b2216286e54f2fa, type: 3}
+  m_Script: {fileID: 11500000, guid: d456f0efe4f1bda4dac228c068e83ed0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LevelTransition
-  nextSceneName: Level 2
+  m_EditorClassIdentifier: Assembly-CSharp::DoorToLevel
+  sceneToLoad: Level 2
+  fadeImage: {fileID: 0}
+  fadeTime: 1
+  doorPrompt: {fileID: 0}
 --- !u!1 &5192469496003394405
 GameObject:
   m_ObjectHideFlags: 0

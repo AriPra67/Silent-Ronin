@@ -196,7 +196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4221240292305704257, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0828
+      value: -9.02
       objectReference: {fileID: 0}
     - target: {fileID: 4221240292305704257, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -246,6 +246,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.44731224
       objectReference: {fileID: 0}
+    - target: {fileID: 5322256700886359044, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6499835994149578051, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
       propertyPath: m_Name
       value: Black wolf
@@ -265,6 +269,10 @@ PrefabInstance:
     - target: {fileID: 8840662034637942611, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
       propertyPath: m_Offset.x
       value: 0.0015474707
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840662034637942611, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1345401904970925230, guid: 0fbff06b496bd6f4c83d675d72e9ee4c, type: 3}
@@ -314,7 +322,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 256
-  wallCheckDistance: 1
+  wallCheckDistance: 4
   attackRangeX: 30
   attackRangeY: 4
   attackCooldown: 0.75
@@ -9244,7 +9252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7496355369992922093, guid: 1be77d18ae46018418cf61c82dd975bd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -529.82
+      value: -468
       objectReference: {fileID: 0}
     - target: {fileID: 7496355369992922093, guid: 1be77d18ae46018418cf61c82dd975bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9336,6 +9344,14 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8115376676801782739, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 1280850344}
+    - target: {fileID: 8115376676801782739, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 264
+      objectReference: {fileID: 0}
     - target: {fileID: 8550301694648891907, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -9361,6 +9377,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea0cde290fab7d4aaf54f6d088171bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+--- !u!4 &1280850344 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5257170877265963345, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
+  m_PrefabInstance: {fileID: 1280850341}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1405343340
 GameObject:
   m_ObjectHideFlags: 0

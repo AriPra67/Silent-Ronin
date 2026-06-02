@@ -7,14 +7,35 @@ public class EnemyHealth : MonoBehaviour
 
     public Animator animator;
 
+    [Header("Boss UI")]
+    public BossHealthUI bossHealthUI;
+
+    [Header("Boss Only Fixes")]
+    public float damageCooldown = 0f;
+    public float deathYOffset = 0f;
+
+    private float lastDamageTime = -999f;
+
+    [Header("Drops")]
+    public GameObject heartDropPrefab;
+
+    [Range(0f, 1f)]
+    public float heartDropChance = 0.35f;
+
     private bool isDead;
 
     void Start()
     {
         currentHealth = maxHealth;
-        //Adding this for bug - Xi
+
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
+
+        if (bossHealthUI != null)
+        {
+            bossHealthUI.SetMaxHearts(maxHealth);
+            bossHealthUI.UpdateHearts(currentHealth);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -22,9 +43,25 @@ public class EnemyHealth : MonoBehaviour
         if (isDead)
             return;
 
+        // Boss-only duplicate damage protection.
+        // Normal enemies are unaffected if damageCooldown is left at 0.
+        if (damageCooldown > 0f)
+        {
+            if (Time.time < lastDamageTime + damageCooldown)
+                return;
+
+            lastDamageTime = Time.time;
+        }
+
         currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         Debug.Log("Enemy HP: " + currentHealth);
+
+        if (bossHealthUI != null)
+        {
+            bossHealthUI.UpdateHearts(currentHealth);
+        }
 
         if (currentHealth <= 0)
         {
@@ -41,11 +78,22 @@ public class EnemyHealth : MonoBehaviour
 
         Debug.Log("DEATH TRIGGERED");
 
+        // Boss-only death sprite/pivot fix.
+        // Normal enemies are unaffected if deathYOffset is left at 0.
+        if (deathYOffset != 0f)
+        {
+            transform.position += new Vector3(0f, deathYOffset, 0f);
+        }
 
         Enemy_Patrol patrol = GetComponent<Enemy_Patrol>();
 
         if (patrol != null)
             patrol.enabled = false;
+
+        BossAI bossAI = GetComponent<BossAI>();
+
+        if (bossAI != null)
+            bossAI.enabled = false;
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
@@ -55,14 +103,12 @@ public class EnemyHealth : MonoBehaviour
             rb.simulated = false;
         }
 
-        //Adding this - Xi
         Enemy_Attack attack = GetComponentInChildren<Enemy_Attack>();
 
         if (attack != null)
         {
             attack.StopAttacking();
             attack.enabled = false;
-
         }
 
         Collider2D col = GetComponent<Collider2D>();
@@ -73,14 +119,28 @@ public class EnemyHealth : MonoBehaviour
         if (animator != null)
         {
             animator.enabled = true;
-            animator.Play("Death", 0, 0f);
+            animator.SetTrigger("Die");
         }
 
         Invoke(nameof(RemoveEnemy), 2f);
     }
 
+    void TryDropHeart()
+    {
+        if (heartDropPrefab == null)
+            return;
+
+        float roll = Random.value;
+
+        if (roll <= heartDropChance)
+        {
+            Instantiate(heartDropPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
     void RemoveEnemy()
     {
+        TryDropHeart();
         Destroy(gameObject);
     }
 }
