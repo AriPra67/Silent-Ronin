@@ -14598,6 +14598,17 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 7458810222287752677, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
   m_PrefabInstance: {fileID: 8407419225817786663}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4394533051427199034 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3356425184403092824, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
+  m_PrefabInstance: {fileID: 8407419225817786663}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69c092f7072546c4da7db283ba1b72d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
 --- !u!1001 &4827862742943517593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14829,6 +14840,14 @@ PrefabInstance:
       propertyPath: healthUI
       value: 
       objectReference: {fileID: 712922993}
+    - target: {fileID: 6153201776162252444, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4394533051427199034}
+    - target: {fileID: 6153201776162252444, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerAttack, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7133418204332458726, guid: b87cb2c7a61d1ed4d9c582760a3199b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.9

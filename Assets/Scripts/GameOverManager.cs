@@ -1,27 +1,32 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class GameOverManager : MonoBehaviour, IPointerClickHandler
+public class GameOverManager : MonoBehaviour
 {
     public GameObject gameOverPanel;
     public PlayerHealth player;
 
+    void Start()
+    {
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+    }
+
     public void ShowGameOver()
     {
-        gameOverPanel.SetActive(true);
+        Debug.Log("SHOW GAME OVER CALLED");
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
+        else
+            Debug.LogWarning("GameOverPanel not assigned");
     }
 
     public void PressRespawn()
     {
-        player.Respawn();
-        gameOverPanel.SetActive(false);
-    }
+        if (player != null)
+            player.Respawn();
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            PressRespawn();
-        }
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
     }
 }

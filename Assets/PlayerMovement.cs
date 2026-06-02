@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool facingRight = true;
     private bool isAttacking;
+    private bool controlsLocked;
 
     [Header("Jumping")]
     public float jumpPower = 10f;
@@ -41,10 +42,33 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (controlsLocked)
+            return;
+
         HandleMovement();
         HandleFlip();
         HandleGravity();
         HandleAnimations();
+    }
+
+    public void LockControls()
+    {
+        controlsLocked = true;
+        horizontalMovement = 0f;
+        isAttacking = false;
+
+        if (rb != null)
+            rb.linearVelocity = Vector2.zero;
+
+        if (playerHitbox != null)
+            playerHitbox.EndAttack();
+    }
+
+    public void UnlockControls()
+    {
+        controlsLocked = false;
+        horizontalMovement = 0f;
+        isAttacking = false;
     }
 
     void HandleMovement()
@@ -84,6 +108,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
+        if (controlsLocked)
+        {
+            horizontalMovement = 0f;
+            return;
+        }
+
         horizontalMovement = context.ReadValue<Vector2>().x;
 
         if (context.canceled)
@@ -92,6 +122,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
+        if (controlsLocked) return;
+
         if (context.performed && IsGrounded())
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
 
@@ -101,6 +133,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
+        if (controlsLocked) return;
+
         if (context.performed && !isAttacking)
         {
             animator.SetTrigger("Attack");
@@ -111,6 +145,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack2(InputAction.CallbackContext context)
     {
+        if (controlsLocked) return;
+
         if (context.performed && !isAttacking)
         {
             animator.SetTrigger("Attack 2");
@@ -121,6 +157,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack3(InputAction.CallbackContext context)
     {
+        if (controlsLocked) return;
+
         if (context.performed && !isAttacking)
         {
             animator.SetTrigger("Attack 3");
@@ -168,9 +206,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalMovement = 0f;
 
         if (rb != null)
-        {
             rb.linearVelocity = Vector2.zero;
-        }
     }
 
     private void OnDrawGizmosSelected()
