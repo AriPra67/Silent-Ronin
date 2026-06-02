@@ -43,9 +43,15 @@ sysinfo.txt
 
 *.apk
 *.aab
-*.exe
 *.app
+
+# Ignore exe/dll files normally
+*.exe
 *.dll
+
+# But allow executable release files inside ReleaseFiles
+!ReleaseFiles/**/*.exe
+!ReleaseFiles/**/*.dll
 
 ############################
 # Large / unwanted assets #
