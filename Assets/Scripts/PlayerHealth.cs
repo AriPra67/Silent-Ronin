@@ -1,15 +1,17 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour
 {
-    //changed to float - Xi
     public float maxHealth = 3f;
     private float currentHealth;
 
     public HealthUI healthUI;
     public Animator animator;
     public PlayerMovement movement;
+    public PlayerAttack playerAttack;
+    public PlayerInput playerInput;
 
     private bool isDead;
     private bool isInvincible;
@@ -17,6 +19,8 @@ public class PlayerHealth : MonoBehaviour
     private Vector3 startPosition;
 
     public float invincibleTime = 0.2f;
+    public float gameOverDelay = 1.2f;
+    public float respawnControlDelay = 0.25f;
 
     void Awake()
     {
@@ -26,6 +30,12 @@ public class PlayerHealth : MonoBehaviour
         if (movement == null)
             movement = GetComponent<PlayerMovement>();
 
+        if (playerAttack == null)
+            playerAttack = GetComponent<PlayerAttack>();
+
+        if (playerInput == null)
+            playerInput = GetComponent<PlayerInput>();
+
         if (healthUI == null)
             healthUI = FindObjectOfType<HealthUI>();
     }
@@ -33,7 +43,6 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         startPosition = transform.position;
-
         currentHealth = maxHealth;
 
         if (healthUI != null)
@@ -41,30 +50,22 @@ public class PlayerHealth : MonoBehaviour
             healthUI.SetMaxHearts(maxHealth);
             healthUI.UpdateHearts(currentHealth);
         }
-        else
-        {
-            Debug.LogWarning("HealthUI NOT FOUND");
-        }
     }
 
     void Update()
     {
-        // 🔥 PRESS H TO TAKE DAMAGE
         if (Input.GetKeyDown(KeyCode.H))
         {
             TakeDamage(1);
         }
     }
 
-    //changed to float not int, for precise enemy damage (won't effect hearts though) - Xi
     public void TakeDamage(float damage)
     {
         if (isDead || isInvincible) return;
 
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
-
-        Debug.Log("Player HP: " + currentHealth);
 
         if (healthUI != null)
             healthUI.UpdateHearts(currentHealth);
@@ -85,16 +86,8 @@ public class PlayerHealth : MonoBehaviour
         currentHealth += heal;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-        Debug.Log("Player HP: " + currentHealth);
-
         if (healthUI != null)
             healthUI.UpdateHearts(currentHealth);
-
-        if (currentHealth <= 0)
-        {
-            Die();
-            return;
-        }
     }
 
     void Die()
@@ -102,12 +95,18 @@ public class PlayerHealth : MonoBehaviour
         if (isDead) return;
 
         isDead = true;
-        Debug.Log("PLAYER DEAD");
+
+        if (playerInput != null)
+            playerInput.enabled = false;
 
         if (movement != null)
             movement.enabled = false;
 
+        if (playerAttack != null)
+            playerAttack.enabled = false;
+
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
@@ -119,26 +118,37 @@ public class PlayerHealth : MonoBehaviour
             animator.ResetTrigger("Hurt");
             animator.Play("Samurai die");
         }
+
+        StartCoroutine(ShowGameOverAfterDelay());
+    }
+
+    IEnumerator ShowGameOverAfterDelay()
+    {
+        yield return new WaitForSeconds(gameOverDelay);
+
+        GameOverManager gameOver = FindFirstObjectByType<GameOverManager>();
+
+        if (gameOver != null)
+            gameOver.ShowGameOver();
     }
 
     public void Respawn()
     {
+        StopAllCoroutines();
+
         isDead = false;
+        isInvincible = false;
 
         currentHealth = maxHealth;
 
         if (healthUI != null)
             healthUI.UpdateHearts(currentHealth);
 
-        Vector3 respawnPosition =
-            GameManager.Instance.GetRespawnPosition(startPosition);
-
+        Vector3 respawnPosition = GameManager.Instance.GetRespawnPosition(startPosition);
         transform.position = respawnPosition;
 
-        if (movement != null)
-            movement.enabled = true;
-
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
@@ -148,7 +158,32 @@ public class PlayerHealth : MonoBehaviour
         }
 
         if (animator != null)
+        {
+            animator.Rebind();
+            animator.Update(0f);
             animator.Play("Idle");
+        }
+
+        StartCoroutine(EnableControlsAfterRespawn());
+    }
+
+    IEnumerator EnableControlsAfterRespawn()
+    {
+        yield return new WaitForSeconds(respawnControlDelay);
+
+        while (Mouse.current != null && Mouse.current.leftButton.isPressed)
+        {
+            yield return null;
+        }
+
+        if (playerInput != null)
+            playerInput.enabled = true;
+
+        if (movement != null)
+            movement.enabled = true;
+
+        if (playerAttack != null)
+            playerAttack.enabled = true;
     }
 
     IEnumerator Invincibility()

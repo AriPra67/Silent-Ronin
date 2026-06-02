@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 public class PlayerAttack : MonoBehaviour
@@ -40,10 +41,15 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed && canAttack)
-        {
-            StartCoroutine(DashAttack());
-        }
+        if (!context.performed || !canAttack)
+            return;
+
+        // Ignore clicks on UI buttons
+        if (EventSystem.current != null &&
+            EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        StartCoroutine(DashAttack());
     }
 
     IEnumerator DashAttack()
@@ -64,7 +70,6 @@ public class PlayerAttack : MonoBehaviour
 
         float direction = transform.localScale.x > 0 ? 1f : -1f;
 
-        // Make dash rigid/flat
         originalGravityScale = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.linearVelocity = Vector2.zero;
@@ -79,7 +84,6 @@ public class PlayerAttack : MonoBehaviour
             yield return null;
         }
 
-        // Stop dash momentum immediately
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = originalGravityScale;
 

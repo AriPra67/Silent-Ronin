@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
 
     public AudioSource jumpSource;
     public AudioClip jumpSound;
-
 
     [Header("Movement")]
     public float moveSpeed = 5f;
@@ -52,15 +52,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void HandleMovement()
-{
-    if (isAttacking)
     {
-        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
-        return;
-    }
+        if (isAttacking)
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            return;
+        }
 
-    rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
-}
+        rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+    }
 
     void HandleFlip()
     {
@@ -81,12 +81,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //Fixing/changing this, constant errors, yvelocity not registered as param - Xi
-
     void HandleAnimations()
     {
         animator.SetFloat("magnitude", Mathf.Abs(horizontalMovement));
     }
+
     public void Move(InputAction.CallbackContext context)
     {
         horizontalMovement = context.ReadValue<Vector2>().x;
@@ -96,49 +95,61 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Jump(InputAction.CallbackContext context)
-{
-    if (context.performed && IsGrounded())
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-
-        if (jumpSource != null && jumpSound != null)
+        if (context.performed && IsGrounded())
         {
-            jumpSource.PlayOneShot(jumpSound);
-        }
-    }
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
 
-    if (context.canceled && rb.linearVelocity.y > 0)
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
-}
+            if (jumpSource != null && jumpSound != null)
+            {
+                jumpSource.PlayOneShot(jumpSound);
+            }
+        }
+
+        if (context.canceled && rb.linearVelocity.y > 0)
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+    }
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed && !isAttacking)
-        {
-            animator.SetTrigger("Attack");
-            isAttacking = true;
-            StartAttackHitbox();
-        }
+        if (!context.performed || isAttacking)
+            return;
+
+        if (EventSystem.current != null &&
+            EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        animator.SetTrigger("Attack");
+        isAttacking = true;
+        StartAttackHitbox();
     }
 
     public void Attack2(InputAction.CallbackContext context)
     {
-        if (context.performed && !isAttacking)
-        {
-            animator.SetTrigger("Attack 2");
-            isAttacking = true;
-            StartAttackHitbox();
-        }
+        if (!context.performed || isAttacking)
+            return;
+
+        if (EventSystem.current != null &&
+            EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        animator.SetTrigger("Attack 2");
+        isAttacking = true;
+        StartAttackHitbox();
     }
 
     public void Attack3(InputAction.CallbackContext context)
     {
-        if (context.performed && !isAttacking)
-        {
-            animator.SetTrigger("Attack 3");
-            isAttacking = true;
-            StartAttackHitbox();
-        }
+        if (!context.performed || isAttacking)
+            return;
+
+        if (EventSystem.current != null &&
+            EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        animator.SetTrigger("Attack 3");
+        isAttacking = true;
+        StartAttackHitbox();
     }
 
     void StartAttackHitbox()
@@ -175,8 +186,6 @@ public class PlayerMovement : MonoBehaviour
         );
     }
 
-    //Don't remove causes compile errors - Xi
-
     public void ResetMovement()
     {
         horizontalMovement = 0f;
@@ -186,7 +195,6 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
         }
     }
-
 
     private void OnDrawGizmosSelected()
     {
